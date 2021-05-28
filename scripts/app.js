@@ -69,10 +69,8 @@ function init() {
     for (let i = 0; i < 3; i++) {
       const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
       startingShipPosition = Math.floor(Math.random() * squareImp.length)
-      if (startingShipPosition % width === 14 || startingShipPosition % width === 15 || startingShipPosition >= 222) {
-        return tieFighter()
-      } else if (squareImp[startingShipPosition].classList.contains('ship') || squareImp[startingShipPosition + 1].classList.contains('ship') || squareImp[startingShipPosition + 2].classList.contains('ship') || squareImp[startingShipPosition + 16].classList.contains('ship') || squareImp[startingShipPosition + 17].classList.contains('ship') || squareImp[startingShipPosition + 18].classList.contains('ship') || squareImp[startingShipPosition + 32].classList.contains('ship') || squareImp[startingShipPosition + 33].classList.contains('ship') || squareImp[startingShipPosition + 35].classList.contains('ship')) {
-        return tieFighter()
+      if (startingShipPosition % width === 14 || startingShipPosition % width === 15 || startingShipPosition >= 222 || squareImp[startingShipPosition].classList.contains('ship') || squareImp[startingShipPosition + 1].classList.contains('ship') || squareImp[startingShipPosition + 2].classList.contains('ship') || squareImp[startingShipPosition + 16].classList.contains('ship') || squareImp[startingShipPosition + 17].classList.contains('ship') || squareImp[startingShipPosition + 18].classList.contains('ship') || squareImp[startingShipPosition + 32].classList.contains('ship') || squareImp[startingShipPosition + 33].classList.contains('ship') || squareImp[startingShipPosition + 35].classList.contains('ship')) {
+        i --
       } else {
         squareImp[startingShipPosition].classList.replace('square', 'ship')
         squareImp[startingShipPosition + 1].classList.replace('square', 'ship')
