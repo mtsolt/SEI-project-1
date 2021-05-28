@@ -77,8 +77,18 @@ section {
   text-align: center;
 }
 
+.ship {
+  background-color: blue;
+  color: white;
+}
+
 .hit{
   background-color: green;
+  color: black;
+}
+
+.miss{
+  background-color: red;
   color: black;
 }
 
