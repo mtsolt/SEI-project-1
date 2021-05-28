@@ -1,0 +1,90 @@
+
+* {
+  box-sizing:border-box;
+}
+
+#rebelSide .grid{
+  background-image: url("../Images/Rebel.png");
+
+}
+
+#impSide .grid{
+  background-image: url("../Images/Imperial.png");
+
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  background-color: gray;
+  color:darkorange;
+  display: flex;
+  
+}
+
+content{
+  display: flex;
+  height: 80vh;
+  flex-direction: column;
+}
+header{
+  flex: 1;
+  text-align: center;
+}
+
+main{
+  display: flex;
+  height: 70vh;
+}
+
+section {
+  flex: 1;
+  margin: auto;
+}
+
+.grid-wrapper {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width: 45vw;
+  height: 60vh;
+  margin: 0 20px;
+}
+
+#scroller {
+  text-align: center;
+  margin: auto;
+}
+
+
+.grid {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 600px;
+  width: 600px;
+  background-color: white;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.grid div {
+  border: 1px solid lightgrey;
+  flex-grow: 1;
+  height: 6.25%;
+  width: 6.25%;
+  text-align: center;
+}
+
+.hit{
+  background-color: green;
+  color: black;
+}
+
+
+footer{
+  text-align: center;
+  flex: 1;
+
+}
