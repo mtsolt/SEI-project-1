@@ -8,9 +8,13 @@ function init() {
   // selects the grids
   const square = document.querySelectorAll('.square')
   //gets all squares
+  const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
+  // selects all squares on Imp
+  const squareReb = document.querySelectorAll('#rebSide .grid-wrapper .grid div')
+  // selects all squares on Reb
+  const tieSelect = document.querySelectorAll('.tieSelect')
 
 
-  // selects all squares in the divs
 
 
 
@@ -34,6 +38,7 @@ function init() {
       gridReb.appendChild(cell) // rebel grid
       cells.push(cell)
     }
+
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
       console.log('cell', cell)
@@ -42,12 +47,56 @@ function init() {
       gridImp.appendChild(cell) //imperial grid
       cells.push(cell)
     }
-    const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid .square')
+    // const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid .square')
+    // for (let i = 0; i < 5; i++) {
+    //   squareImp[startingShipPosition].classList.replace('square', 'ship')
+    //   startingShipPosition = Math.floor(Math.random() * squareImp.length)
+    // }
+    const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid .square')
     for (let i = 0; i < 5; i++) {
-      squareImp[startingShipPosition].classList.replace('square', 'ship')
-      startingShipPosition = Math.floor(Math.random() * squareImp.length)
+      squareReb[startingShipPosition].classList.replace('square', 'ship')
+      startingShipPosition = Math.floor(Math.random() * squareReb.length)
     }
   }
+
+
+
+
+  // const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
+  // const squareReb = document.querySelectorAll('#rebSide .grid-wrapper .grid div')
+
+  function tieFighter() {
+    for (let i = 0; i < 3; i++) {
+      const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
+      startingShipPosition = Math.floor(Math.random() * squareImp.length)
+      if (startingShipPosition % width === 14 || startingShipPosition % width === 15 || startingShipPosition >= 222) {
+        return tieFighter()
+      } else if (squareImp[startingShipPosition].classList.contains('ship') || squareImp[startingShipPosition + 1].classList.contains('ship') || squareImp[startingShipPosition + 2].classList.contains('ship') || squareImp[startingShipPosition + 16].classList.contains('ship') || squareImp[startingShipPosition + 17].classList.contains('ship') || squareImp[startingShipPosition + 18].classList.contains('ship') || squareImp[startingShipPosition + 32].classList.contains('ship') || squareImp[startingShipPosition + 33].classList.contains('ship') || squareImp[startingShipPosition + 35].classList.contains('ship')) {
+        return tieFighter()
+      } else {
+        squareImp[startingShipPosition].classList.replace('square', 'ship')
+        squareImp[startingShipPosition + 1].classList.replace('square', 'ship')
+        squareImp[startingShipPosition + 2].classList.replace('square', 'ship')
+        squareImp[startingShipPosition + 17].classList.replace('square', 'ship')
+        squareImp[startingShipPosition + 32].classList.replace('square', 'ship')
+        squareImp[startingShipPosition + 33].classList.replace('square', 'ship')
+        squareImp[startingShipPosition + 34].classList.replace('square', 'ship')
+      }
+    }
+  }
+
+  // function xWing() {
+  //   const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid div')
+  //   startingShipPosition = Math.floor(Math.random() * squareReb.length)
+  //   if (startingShipPosition % 16 === 0 && startingShipPosition + 16 % !==)
+  //   squareImp[startingShipPosition].classList.replace('square', 'ship')
+  //   squareImp[startingShipPosition + 1].classList.replace('square', 'ship')
+  //   squareImp[startingShipPosition + 2].classList.replace('square', 'ship')
+  //   squareImp[startingShipPosition + 3].classList.replace('square', 'ship')
+  //   squareImp[startingShipPosition + 32].classList.replace('square', 'ship')
+  //   squareImp[startingShipPosition + 33].classList.replace('square', 'ship')
+  //   squareImp[startingShipPosition + 34].classList.replace('square', 'ship')
+  // }
 
 
   function shoot(event) {
@@ -65,7 +114,9 @@ function init() {
   }
 
 
-
+  tieSelect.forEach(button => {
+    button.addEventListener('click', tieFighter)
+  })
 
   gridSquare.forEach(item => {
     item.addEventListener('click', shoot)
