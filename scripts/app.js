@@ -10,9 +10,11 @@ function init() {
   //gets all squares
   const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
   // selects all squares on Imp
-  const squareReb = document.querySelectorAll('#rebSide .grid-wrapper .grid div')
+  const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid div')
   // selects all squares on Reb
-  const tieSelect = document.querySelectorAll('.tieSelect')
+  const tieSelect = document.querySelector('.tieSelect')
+
+  const xWingSelect = document.querySelector('.xSelect')
 
 
 
@@ -52,11 +54,11 @@ function init() {
     //   squareImp[startingShipPosition].classList.replace('square', 'ship')
     //   startingShipPosition = Math.floor(Math.random() * squareImp.length)
     // }
-    const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid .square')
-    for (let i = 0; i < 5; i++) {
-      squareReb[startingShipPosition].classList.replace('square', 'ship')
-      startingShipPosition = Math.floor(Math.random() * squareReb.length)
-    }
+    // const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid .square')
+    // for (let i = 0; i < 5; i++) {
+    //   squareReb[startingShipPosition].classList.replace('square', 'ship')
+    //   startingShipPosition = Math.floor(Math.random() * squareReb.length)
+    // }
   }
 
 
@@ -70,7 +72,7 @@ function init() {
       const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
       startingShipPosition = Math.floor(Math.random() * squareImp.length)
       if (startingShipPosition % width === 14 || startingShipPosition % width === 15 || startingShipPosition >= 222 || squareImp[startingShipPosition].classList.contains('ship') || squareImp[startingShipPosition + 1].classList.contains('ship') || squareImp[startingShipPosition + 2].classList.contains('ship') || squareImp[startingShipPosition + 16].classList.contains('ship') || squareImp[startingShipPosition + 17].classList.contains('ship') || squareImp[startingShipPosition + 18].classList.contains('ship') || squareImp[startingShipPosition + 32].classList.contains('ship') || squareImp[startingShipPosition + 33].classList.contains('ship') || squareImp[startingShipPosition + 35].classList.contains('ship')) {
-        i --
+        i--
       } else {
         squareImp[startingShipPosition].classList.replace('square', 'ship')
         squareImp[startingShipPosition + 1].classList.replace('square', 'ship')
@@ -83,18 +85,23 @@ function init() {
     }
   }
 
-  // function xWing() {
-  //   const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid div')
-  //   startingShipPosition = Math.floor(Math.random() * squareReb.length)
-  //   if (startingShipPosition % 16 === 0 && startingShipPosition + 16 % !==)
-  //   squareImp[startingShipPosition].classList.replace('square', 'ship')
-  //   squareImp[startingShipPosition + 1].classList.replace('square', 'ship')
-  //   squareImp[startingShipPosition + 2].classList.replace('square', 'ship')
-  //   squareImp[startingShipPosition + 3].classList.replace('square', 'ship')
-  //   squareImp[startingShipPosition + 32].classList.replace('square', 'ship')
-  //   squareImp[startingShipPosition + 33].classList.replace('square', 'ship')
-  //   squareImp[startingShipPosition + 34].classList.replace('square', 'ship')
-  // }
+  function xWing() {
+    for (let i = 0; i < 3; i++) {
+      const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid div')
+      startingShipPosition = Math.floor(Math.random() * squareReb.length)
+      if (startingShipPosition % width === 12 || startingShipPosition % width === 13 || startingShipPosition % width === 14 || startingShipPosition % width === 15 || startingShipPosition >= 236 || startingShipPosition <= 16 || squareReb[startingShipPosition].classList.contains('ship') || squareReb[startingShipPosition + 1].classList.contains('ship') || squareReb[startingShipPosition + 2].classList.contains('ship') || squareReb[startingShipPosition + 3].classList.contains('ship') || squareReb[startingShipPosition + 4].classList.contains('ship') || squareReb[startingShipPosition + 17].classList.contains('ship') || squareReb[startingShipPosition - 15].classList.contains('ship')) {
+        i--
+      } else {
+        squareReb[startingShipPosition].classList.replace('square', 'ship')
+        squareReb[startingShipPosition + 1].classList.replace('square', 'ship')
+        squareReb[startingShipPosition + 2].classList.replace('square', 'ship')
+        squareReb[startingShipPosition + 3].classList.replace('square', 'ship')
+        squareReb[startingShipPosition + 4].classList.replace('square', 'ship')
+        squareReb[startingShipPosition - 15].classList.replace('square', 'ship')
+        squareReb[startingShipPosition + 17].classList.replace('square', 'ship')
+      }
+    }
+  }
 
 
   function shoot(event) {
@@ -112,9 +119,11 @@ function init() {
   }
 
 
-  tieSelect.forEach(button => {
-    button.addEventListener('click', tieFighter)
-  })
+
+  tieSelect.addEventListener('click', tieFighter)
+
+  xWingSelect.addEventListener('click', xWing)
+
 
   gridSquare.forEach(item => {
     item.addEventListener('click', shoot)
