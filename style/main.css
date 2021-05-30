@@ -29,6 +29,7 @@ content{
   border-radius: 75px;
   margin: 50px;
 }
+
 header{
   text-align: center;
   font-family: 'Star Jedi', arial;
@@ -46,23 +47,33 @@ section {
   margin: auto;
 }
 
+section #center {
+  display:flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+#scroller {
+  flex: 1;
+  text-align: center;
+  margin: auto;
+  font-family: 'Star Jedi', arial;
+  font-size: 25px;
+  min-width: 150px;
+}
+
+#start-game {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
 .grid-wrapper {
   display:flex;
   align-items: center;
   justify-content: center;
   margin: 0 20px;
 }
-
-#scroller {
-  flex: 1;
-  text-align: center;
-  margin: auto 20px;
-  font-family: 'Star Jedi', arial;
-  font-size: 25px;
-  min-width: 150px;
-
-}
-
 
 .grid {
   align-items: center;
@@ -86,6 +97,12 @@ section {
   text-align: center;
 }
 
+.buttonsBox {
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
 .ship {
   background-color: blue;
   color: white;
@@ -101,10 +118,6 @@ section {
   color: black;
 }
 
-.buttonsBox {
-  display: flex;
-  justify-content: center;
-}
 
 button {
   padding: 10px;
@@ -114,5 +127,5 @@ button {
 footer{
   text-align: center;
   flex: 1;
-
+  padding: 15px;
 }

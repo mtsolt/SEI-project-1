@@ -1,6 +1,10 @@
 function init() {
 
-  
+  // Are§ for selecting bits of the HTML
+  const startGameButton = document.querySelector('#start-button')
+  // selects start button
+  const centerColumn = document.querySelector('#center')
+  // selects center column
 
   const gridReb = document.querySelector('#rebelSide .grid-wrapper .grid')
   // this creates const for the rebel side
@@ -9,11 +13,31 @@ function init() {
   const gridSquare = document.querySelectorAll('.grid')
   // selects the grids
   const square = document.querySelectorAll('.square')
-  //gets all squares
-  const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
+  // selects all squares
+  // const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
   // selects all squares on Imp
-  const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid div')
+  // const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid div')
   // selects all squares on Reb
+  const rebelButtonsBox = document.querySelector('#rebel')
+  console.log(rebelButtonsBox, 'rebelButtonsBox')
+
+  const imperialButtonsBox = document.querySelector('#imperial')
+  console.log(imperialButtonsBox, 'imperialButtonsBox')
+
+  // Area for creating new elements
+  const chooseRebButton = document.createElement('button')
+  chooseRebButton.innerText = 'REBEL'
+  chooseRebButton.style.padding = '20px'
+
+  // Rebel start button
+  const chooseImpButton = document.createElement('button')
+  chooseImpButton.innerText = 'IMPERIAL'
+  chooseImpButton.style.padding = '20px'
+  // Imperial start button
+  const restartButton = document.createElement('button')
+  restartButton.innerText = 'Restart Game'
+  restartButton.style.display = 'flex'
+  restartButton.style.margin = '0 30%'
 
 
 
@@ -26,7 +50,7 @@ function init() {
 
   const cruiserSelect = document.querySelector('.cruiserSelect')
 
-  const imperialShot = document.querySelector('.computerShoot')
+  // const imperialShot = document.querySelector('.computerShoot')
 
 
   const width = 16
@@ -34,7 +58,7 @@ function init() {
   const cells = []
   // this is format of grids
 
-  let startingShipPosition = Math.floor(Math.random() * square.length)
+  let gridPositiion = Math.floor(Math.random() * square.length)
   console.log('gridSquare', gridReb)
 
   // function startGame() {
@@ -42,6 +66,34 @@ function init() {
 
 
   // }
+
+  function startGame() {
+    startGameButton.style.display = 'none'
+    gridReb.appendChild(chooseRebButton)
+    gridImp.appendChild(chooseImpButton)
+    centerColumn.appendChild(restartButton)
+
+    // return createGrids()
+  }
+
+  function chooseImperial() {
+    gridImp.removeChild(chooseImpButton)
+    gridReb.removeChild(chooseRebButton)
+    imperialButtonsBox.style.display = 'flex'
+    setTimeout(createGrids(), 2000)
+    setTimeout(placeFalcon(), 10)
+    setTimeout(placeXWing(), 10)
+  }
+
+  function chooseRebel() {
+    gridReb.removeChild(chooseRebButton)
+    gridImp.removeChild(chooseImpButton)
+    rebelButtonsBox.style.display = 'flex'
+    setTimeout(createGrids(), 2000)
+    setTimeout(placeCruiser(), 10)
+    setTimeout(placeTieFighter(), 10)
+  }
+
 
 
   function createGrids() { //this creates both grids. Feel like there must be a way to do this with just one for loop, not sure how just yet though. 
@@ -63,60 +115,63 @@ function init() {
     }
     // const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid .square')      <<<<---- To randomly assign 5 squares on imperial side
     // for (let i = 0; i < 5; i++) {
-    //   squareImp[startingShipPosition].classList.replace('square', 'ship')
-    //   startingShipPosition = Math.floor(Math.random() * squareImp.length)
+    //   squareImp[gridPositiion].classList.replace('square', 'ship')
+    //   gridPositiion = Math.floor(Math.random() * squareImp.length)
     // }
     // const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid .square')     <<<<<--- to randomly assign 5 sqaures on imperial side. 
     // for (let i = 0; i < 5; i++) {
-    //   squareReb[startingShipPosition].classList.replace('square', 'ship')
-    //   startingShipPosition = Math.floor(Math.random() * squareReb.length)
+    //   squareReb[gridPositiion].classList.replace('square', 'ship')
+    //   gridPositiion = Math.floor(Math.random() * squareReb.length)
     // }
   }
 
+
+
   // Deploys imperial ships
-  function tieFighter() {
+  // deploy the tie fighters
+  function placeTieFighter() {
     for (let i = 0; i < 3; i++) { // ridiculously long code for if any conditions that would cause ships to be partially off grid, or overlapping, to not run. Otherwise place i amount ships. 
       const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
-      startingShipPosition = Math.floor(Math.random() * squareImp.length)
-      if (startingShipPosition % width === 14 || startingShipPosition % width === 15 || startingShipPosition >= 222 || squareImp[startingShipPosition].classList.contains('ship') || squareImp[startingShipPosition + 1].classList.contains('ship') || squareImp[startingShipPosition + 2].classList.contains('ship') || squareImp[startingShipPosition + 16].classList.contains('ship') || squareImp[startingShipPosition + 17].classList.contains('ship') || squareImp[startingShipPosition + 18].classList.contains('ship') || squareImp[startingShipPosition + 32].classList.contains('ship') || squareImp[startingShipPosition + 33].classList.contains('ship') || squareImp[startingShipPosition + 35].classList.contains('ship')) {
+      gridPositiion = Math.floor(Math.random() * squareImp.length)
+      if (gridPositiion % width === 14 || gridPositiion % width === 15 || gridPositiion >= 222 || squareImp[gridPositiion].classList.contains('ship') || squareImp[gridPositiion + 1].classList.contains('ship') || squareImp[gridPositiion + 2].classList.contains('ship') || squareImp[gridPositiion + 16].classList.contains('ship') || squareImp[gridPositiion + 17].classList.contains('ship') || squareImp[gridPositiion + 18].classList.contains('ship') || squareImp[gridPositiion + 32].classList.contains('ship') || squareImp[gridPositiion + 33].classList.contains('ship') || squareImp[gridPositiion + 35].classList.contains('ship')) {
         i--
-      } else { // this is the code for the template of the tie fighter
-        squareImp[startingShipPosition].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 1].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 2].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 17].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 32].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 33].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 34].classList.replace('square', 'ship')
+      } else { // this is the code for the template of the tie fighter - must be a way to have this in single variable, which can then be used to rotate, and display image when whole ship gone. 
+        squareImp[gridPositiion].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 1].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 2].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 17].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 32].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 33].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 34].classList.replace('square', 'ship')
       }
     }
   }
-
-  function impCruiser() {
+  // deploy the cruiser
+  function placeCruiser() {
     for (let i = 0; i < 1; i++) {
       const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
-      startingShipPosition = Math.floor(Math.random() * squareImp.length)
-      if (startingShipPosition <= 15 || startingShipPosition > 218 || startingShipPosition % width === 11 || startingShipPosition % width === 12 || startingShipPosition % width === 13 || startingShipPosition % width === 14 || startingShipPosition % width === 15 || squareImp[startingShipPosition - 14].classList.contains('ship') || squareImp[startingShipPosition - 13].classList.contains('ship') || squareImp[startingShipPosition - 11].classList.contains('ship') || squareImp[startingShipPosition].classList.contains('ship') || squareImp[startingShipPosition + 1].classList.contains('ship') || squareImp[startingShipPosition + 2].classList.contains('ship') || squareImp[startingShipPosition + 3].classList.contains('ship') || squareImp[startingShipPosition + 4].classList.contains('ship') || squareImp[startingShipPosition + 5].classList.contains('ship') || squareImp[startingShipPosition + 16].classList.contains('ship') || squareImp[startingShipPosition + 17].classList.contains('ship') || squareImp[startingShipPosition + 18].classList.contains('ship') || squareImp[startingShipPosition + 19].classList.contains('ship') || squareImp[startingShipPosition + 20].classList.contains('ship') || squareImp[startingShipPosition + 21].classList.contains('ship') || squareImp[startingShipPosition + 34].classList.contains('ship') || squareImp[startingShipPosition + 35].classList.contains('ship') || squareImp[startingShipPosition + 37].classList.contains('ship')) {
+      gridPositiion = Math.floor(Math.random() * squareImp.length)
+      if (gridPositiion <= 15 || gridPositiion > 218 || gridPositiion % width === 11 || gridPositiion % width === 12 || gridPositiion % width === 13 || gridPositiion % width === 14 || gridPositiion % width === 15 || squareImp[gridPositiion - 14].classList.contains('ship') || squareImp[gridPositiion - 13].classList.contains('ship') || squareImp[gridPositiion - 11].classList.contains('ship') || squareImp[gridPositiion].classList.contains('ship') || squareImp[gridPositiion + 1].classList.contains('ship') || squareImp[gridPositiion + 2].classList.contains('ship') || squareImp[gridPositiion + 3].classList.contains('ship') || squareImp[gridPositiion + 4].classList.contains('ship') || squareImp[gridPositiion + 5].classList.contains('ship') || squareImp[gridPositiion + 16].classList.contains('ship') || squareImp[gridPositiion + 17].classList.contains('ship') || squareImp[gridPositiion + 18].classList.contains('ship') || squareImp[gridPositiion + 19].classList.contains('ship') || squareImp[gridPositiion + 20].classList.contains('ship') || squareImp[gridPositiion + 21].classList.contains('ship') || squareImp[gridPositiion + 34].classList.contains('ship') || squareImp[gridPositiion + 35].classList.contains('ship') || squareImp[gridPositiion + 37].classList.contains('ship')) {
         i--
       } else {
-        squareImp[startingShipPosition - 14].classList.replace('square', 'ship')
-        squareImp[startingShipPosition - 13].classList.replace('square', 'ship')
-        squareImp[startingShipPosition - 11].classList.replace('square', 'ship')
-        squareImp[startingShipPosition].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 1].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 2].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 3].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 4].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 5].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 16].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 17].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 18].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 19].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 20].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 21].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 34].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 35].classList.replace('square', 'ship')
-        squareImp[startingShipPosition + 37].classList.replace('square', 'ship')
+        squareImp[gridPositiion - 14].classList.replace('square', 'ship')
+        squareImp[gridPositiion - 13].classList.replace('square', 'ship')
+        squareImp[gridPositiion - 11].classList.replace('square', 'ship')
+        squareImp[gridPositiion].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 1].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 2].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 3].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 4].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 5].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 16].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 17].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 18].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 19].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 20].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 21].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 34].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 35].classList.replace('square', 'ship')
+        squareImp[gridPositiion + 37].classList.replace('square', 'ship')
 
       }
     }
@@ -125,118 +180,153 @@ function init() {
 
 
   // Deploys the rebel ships
-  function xWing() {
+  // deploy xwings
+  function placeXWing() {
     for (let i = 0; i < 3; i++) { // ridiculously long code for if any conditions that would cause ships to be partially off grid, or overlapping, to not run. Otherwise place i amount ships.
       const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid div')
-      startingShipPosition = Math.floor(Math.random() * squareReb.length)
-      if (startingShipPosition % width === 12 || startingShipPosition % width === 13 || startingShipPosition % width === 14 || startingShipPosition % width === 15 || startingShipPosition >= 236 || startingShipPosition <= 16 || squareReb[startingShipPosition].classList.contains('ship') || squareReb[startingShipPosition + 1].classList.contains('ship') || squareReb[startingShipPosition + 2].classList.contains('ship') || squareReb[startingShipPosition + 3].classList.contains('ship') || squareReb[startingShipPosition + 4].classList.contains('ship') || squareReb[startingShipPosition + 17].classList.contains('ship') || squareReb[startingShipPosition - 15].classList.contains('ship')) {
+      gridPositiion = Math.floor(Math.random() * squareReb.length)
+      if (gridPositiion % width === 12 || gridPositiion % width === 13 || gridPositiion % width === 14 || gridPositiion % width === 15 || gridPositiion >= 236 || gridPositiion <= 16 || squareReb[gridPositiion].classList.contains('ship') || squareReb[gridPositiion + 1].classList.contains('ship') || squareReb[gridPositiion + 2].classList.contains('ship') || squareReb[gridPositiion + 3].classList.contains('ship') || squareReb[gridPositiion + 4].classList.contains('ship') || squareReb[gridPositiion + 17].classList.contains('ship') || squareReb[gridPositiion - 15].classList.contains('ship')) {
         i--
       } else { // this is the code for the template of the xWing
-        squareReb[startingShipPosition].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 1].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 2].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 3].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 4].classList.replace('square', 'ship')
-        squareReb[startingShipPosition - 15].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 17].classList.replace('square', 'ship')
+        squareReb[gridPositiion].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 1].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 2].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 3].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 4].classList.replace('square', 'ship')
+        squareReb[gridPositiion - 15].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 17].classList.replace('square', 'ship')
       }
     }
   }
-
-  function falcon() {
+  // deploy falcon
+  function placeFalcon() {
     for (let i = 0; i < 1; i++) {
       const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid div')
-      startingShipPosition = Math.floor(Math.random() * squareReb.length)
-      if (startingShipPosition % width === 12 || startingShipPosition % width === 13 || startingShipPosition % width === 14 || startingShipPosition % width === 15 || startingShipPosition <= 15 || startingShipPosition > 203 || squareReb[startingShipPosition].classList.contains('ship') || squareReb[startingShipPosition - 14].classList.contains('ship') || squareReb[startingShipPosition - 15].classList.contains('ship') || squareReb[startingShipPosition + 1].classList.contains('ship') || squareReb[startingShipPosition + 2].classList.contains('ship') || squareReb[startingShipPosition + 3].classList.contains('ship') || squareReb[startingShipPosition + 4].classList.contains('ship') || squareReb[startingShipPosition + 16].classList.contains('ship') || squareReb[startingShipPosition + 17].classList.contains('ship') || squareReb[startingShipPosition + 18].classList.contains('ship') || squareReb[startingShipPosition + 19].classList.contains('ship') || squareReb[startingShipPosition + 32].classList.contains('ship') || squareReb[startingShipPosition + 33].classList.contains('ship') || squareReb[startingShipPosition + 34].classList.contains('ship') || squareReb[startingShipPosition + 35].classList.contains('ship') || squareReb[startingShipPosition + 36].classList.contains('ship') || squareReb[startingShipPosition + 49].classList.contains('ship') || squareReb[startingShipPosition + 50].classList.contains('ship')) {
+      gridPositiion = Math.floor(Math.random() * squareReb.length)
+      if (gridPositiion % width === 12 || gridPositiion % width === 13 || gridPositiion % width === 14 || gridPositiion % width === 15 || gridPositiion <= 15 || gridPositiion > 203 || squareReb[gridPositiion].classList.contains('ship') || squareReb[gridPositiion - 14].classList.contains('ship') || squareReb[gridPositiion - 15].classList.contains('ship') || squareReb[gridPositiion + 1].classList.contains('ship') || squareReb[gridPositiion + 2].classList.contains('ship') || squareReb[gridPositiion + 3].classList.contains('ship') || squareReb[gridPositiion + 4].classList.contains('ship') || squareReb[gridPositiion + 16].classList.contains('ship') || squareReb[gridPositiion + 17].classList.contains('ship') || squareReb[gridPositiion + 18].classList.contains('ship') || squareReb[gridPositiion + 19].classList.contains('ship') || squareReb[gridPositiion + 32].classList.contains('ship') || squareReb[gridPositiion + 33].classList.contains('ship') || squareReb[gridPositiion + 34].classList.contains('ship') || squareReb[gridPositiion + 35].classList.contains('ship') || squareReb[gridPositiion + 36].classList.contains('ship') || squareReb[gridPositiion + 49].classList.contains('ship') || squareReb[gridPositiion + 50].classList.contains('ship')) {
         i--
       } else {
-        squareReb[startingShipPosition].classList.replace('square', 'ship')
-        squareReb[startingShipPosition - 15].classList.replace('square', 'ship')
-        squareReb[startingShipPosition - 14].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 1].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 2].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 3].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 4].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 16].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 17].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 18].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 19].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 32].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 33].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 34].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 35].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 36].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 49].classList.replace('square', 'ship')
-        squareReb[startingShipPosition + 50].classList.replace('square', 'ship')
+        squareReb[gridPositiion].classList.replace('square', 'ship')
+        squareReb[gridPositiion - 15].classList.replace('square', 'ship')
+        squareReb[gridPositiion - 14].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 1].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 2].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 3].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 4].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 16].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 17].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 18].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 19].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 32].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 33].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 34].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 35].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 36].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 49].classList.replace('square', 'ship')
+        squareReb[gridPositiion + 50].classList.replace('square', 'ship')
       }
     }
   }
 
 
-
-
-
-  // The function for player to shoot.
-  function playerShot(event) {
+  function playerRebelShot(event) {
     console.log('click')
     console.log(event.target, 'event target')
     if (event.target.classList.contains('square')) {
       event.target.classList.replace('square', 'miss')
       console.log('miss')
-      setTimeout(computerShoot, 2000)
+      setTimeout(computerImperialShot, 2000)
     } else {
       event.target.classList.replace('ship', 'hit')
       console.log('hit')
       // repeat function
     }
   }
-
-  // The function for the computer to shoot.
-
-
-
-  function computerShoot() {
+  // 
+  function computerImperialShot() {
     console.log('computer shoots')
     for (let i = 0; i < 1; i++) {
       const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid div')
-      startingShipPosition = Math.floor(Math.random() * squareReb.length)
-      if (squareReb[startingShipPosition].classList.contains('square')) {
-        squareReb[startingShipPosition].classList.replace('square', 'miss')
+      gridPositiion = Math.floor(Math.random() * squareReb.length)
+      if (squareReb[gridPositiion].classList.contains('square')) {
+        squareReb[gridPositiion].classList.replace('square', 'miss')
         console.log('computer miss')
-      } else if (squareReb[startingShipPosition].classList.contains('miss') || squareReb[startingShipPosition].classList.contains('hit')) {
+      } else if (squareReb[gridPositiion].classList.contains('miss') || squareReb[gridPositiion].classList.contains('hit')) {
         i--
       } else {
-        squareReb[startingShipPosition].classList.replace('ship', 'hit')
+        squareReb[gridPositiion].classList.replace('ship', 'hit')
         console.log('Computer hits, it goes again!')
-        setTimeout(computerShoot, 2000)
+        setTimeout(computerImperialShot, 2000)
       }
     }
-    // function computerHits(startingShipPosition) {
-    //   console.log('computer shoots')
-    //   for (let i = 0; i < 1; i++) {
+  }
 
-
-    // }
-  // }
+  
+  function playerImperialShot(event) {
+    console.log('click')
+    console.log(event.target, 'event target')
+    if (event.target.classList.contains('square')) {
+      event.target.classList.replace('square', 'miss')
+      console.log('miss')
+      setTimeout(computerRebelShot, 2000)
+    } else {
+      event.target.classList.replace('ship', 'hit')
+      console.log('hit')
+      // repeat function
+    }
+  }
+  function computerRebelShot() {
+    console.log('computer shoots')
+    for (let i = 0; i < 1; i++) {
+      const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
+      gridPositiion = Math.floor(Math.random() * squareImp.length)
+      if (squareImp[gridPositiion].classList.contains('square')) {
+        squareImp[gridPositiion].classList.replace('square', 'miss')
+        console.log('computer miss')
+      } else if (squareImp[gridPositiion].classList.contains('miss') || squareImp[gridPositiion].classList.contains('hit')) {
+        i--
+      } else {
+        squareImp[gridPositiion].classList.replace('ship', 'hit')
+        console.log('Computer hits, it goes again!')
+        setTimeout(computerRebelShot, 2000)
+      }
+    }
   }
 
 
 
-  imperialShot.addEventListener('click', computerShoot)
 
-  tieSelect.addEventListener('click', tieFighter)
 
-  xWingSelect.addEventListener('click', xWing)
 
-  falconSelect.addEventListener('click', falcon)
+  startGameButton.addEventListener('click', startGame)
 
-  cruiserSelect.addEventListener('click', impCruiser)
+  restartButton.addEventListener('click', startGame)
 
-  gridSquare.forEach(item => {
-    item.addEventListener('click', playerShot)
-  })
+  chooseRebButton.addEventListener('click', chooseRebel)
+  chooseImpButton.addEventListener('click', chooseImperial)
 
-  createGrids()
+  // imperialShot.addEventListener('click', computerShoot)
+
+  tieSelect.addEventListener('click', placeTieFighter)
+
+  xWingSelect.addEventListener('click', placeXWing)
+
+  falconSelect.addEventListener('click', placeFalcon)
+
+  cruiserSelect.addEventListener('click', placeCruiser)
+
+  // gridSquare.forEach(item => {
+  //   item.addEventListener('click', playerShot)
+  // })
+
+  gridImp.addEventListener('click', playerRebelShot)
+
+  gridReb.addEventListener('click', playerImperialShot)
+
+
+
+
+  // createGrids()
   // run music
   // start scroller
   // 1 or 2 player - dream
