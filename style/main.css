@@ -1,4 +1,6 @@
 
+
+
 * {
   box-sizing:border-box;
 }
@@ -14,31 +16,33 @@
 }
 
 body {
-  height: 100vh;
-  margin: 0;
-  background-color: gray;
-  color:darkorange;
+  background-color: black;
+  color:yellow;
   display: flex;
   
 }
 
 content{
   display: flex;
-  height: 80vh;
   flex-direction: column;
+  border: double 2px yellow;
+  border-radius: 75px;
+  margin: 50px;
 }
 header{
-  flex: 1;
   text-align: center;
+  font-family: 'Star Jedi', arial;
+  font-size: 60px;
+  
 }
 
 main{
   display: flex;
-  height: 70vh;
+
 }
 
 section {
-  flex: 1;
+  flex: 3;
   margin: auto;
 }
 
@@ -46,14 +50,17 @@ section {
   display:flex;
   align-items: center;
   justify-content: center;
-  width: 45vw;
-  height: 60vh;
   margin: 0 20px;
 }
 
 #scroller {
+  flex: 1;
   text-align: center;
-  margin: auto;
+  margin: auto 20px;
+  font-family: 'Star Jedi', arial;
+  font-size: 25px;
+  min-width: 150px;
+
 }
 
 
@@ -64,9 +71,11 @@ section {
   justify-content: center;
   height: 600px;
   width: 600px;
-  background-color: white;
+  background-color: teal;
   max-width: 100%;
   max-height: 100%;
+  background-size: contain;
+  background-size: cover;
 }
 
 .grid div {
@@ -88,10 +97,19 @@ section {
 }
 
 .miss{
-  background-color: red;
+  background-color: rgb(255, 238, 0);
   color: black;
 }
 
+.buttonsBox {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  padding: 10px;
+  margin: 5px;
+}
 
 footer{
   text-align: center;

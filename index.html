@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+  <link href="https://allfont.net/allfont.css?fonts=star-jedi" rel="stylesheet" type="text/css">
+  
+  <!-- <Access-Control-Allow-Origin: https://allfont.net/allfont.css?fonts=star-jedi></Access-Control-Allow-Origin:>  need to give access here to avoid the COR error. Not sure how. -->
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,22 +15,29 @@
 
 <body>
   <content>
-    <header>STAR BATTLE SHIP WARS</header>
+    <header>STAR WARS<br>BATTLE SHIP </header>
     <main>
       <section id='rebelSide'>
         <div class='grid-wrapper'>
           <div class='grid'></div>
         </div>
-        <button class='xSelect'>X-Wing</button>
-        <button class='falconSelect'>Millenium Falcon</button>
+        <div class='buttonsBox' id='rebel'>
+          Deploy your:
+          <button class='xSelect'>X-Wing</button>
+          <button class='falconSelect'>Millenium Falcon</button>
+        </div>
       </section>
-      <div id='scroller'> The REBEL ALLIANCE are making an attack on the IMPERIAL DEATH STAR, do you have what it takes to bring down the mighty station? </div>
+      <div id='scroller'> The REBEL ALLIANCE are making a daring attack on the IMPERIAL fleet, do you have what it takes to survive? </div>
       <section id='impSide'>
         <div class='grid-wrapper'>
           <div class='grid'></div>
         </div>
-        <button class='tieSelect'>Tie Fighter</button>
-        <button class='cruiserSelect'>Arquitens Cruiser</button>
+        <div class='buttonsBox' id='imperial'>
+          Deploy your:
+          <button class='tieSelect'>Tie Fighter</button>
+          <button class='cruiserSelect'>Arquitens Cruiser</button>
+          <button class='computerShoot'>Computer Shot</button>
+        </div>
       </section>
     </main>
     <footer>
