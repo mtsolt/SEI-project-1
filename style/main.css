@@ -47,10 +47,15 @@ section {
   margin: auto;
 }
 
-section #center {
+#center {
   display:flex;
   flex-direction: column;
   align-content: center;
+}
+
+#begin {
+  display: none;
+  justify-content: center;
 }
 
 #scroller {

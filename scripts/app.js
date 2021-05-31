@@ -6,6 +6,9 @@ function init() {
   const centerColumn = document.querySelector('#center')
   // selects center column
 
+  const rebelSide = document.querySelector('#rebelSide')
+  const impSide = document.querySelector('#impSide')
+
   const gridReb = document.querySelector('#rebelSide .grid-wrapper .grid')
   // this creates const for the rebel side
   const gridImp = document.querySelector('#impSide .grid-wrapper .grid')
@@ -20,6 +23,7 @@ function init() {
   // selects all squares on Reb
   const scroller = document.querySelector('#scroller')
   // selects the scroller
+  const begin = document.querySelector('#begin')
 
   const rebelButtonsBox = document.querySelector('#rebel')
   console.log(rebelButtonsBox, 'rebelButtonsBox')
@@ -30,17 +34,22 @@ function init() {
   // Area for creating new elements
   const chooseRebButton = document.createElement('button')
   chooseRebButton.innerText = 'REBEL'
-  chooseRebButton.style.padding = '20px'
-
+  chooseRebButton.style.padding = '30%'
+  chooseRebButton.style.background = 'none'
+  chooseRebButton.style.border = 'none'
   // Rebel start button
   const chooseImpButton = document.createElement('button')
   chooseImpButton.innerText = 'IMPERIAL'
-  chooseImpButton.style.padding = '20px'
+  chooseImpButton.style.padding = '30%'
+  chooseImpButton.style.background = 'none'
+  chooseImpButton.style.border = 'none'
+
   // Imperial start button
   const restartButton = document.createElement('button')
   restartButton.innerText = 'Restart Game'
   restartButton.style.display = 'flex'
-  restartButton.style.margin = '0 30%'
+  restartButton.style.justifyContent = 'center'
+  // restart page
 
 
 
@@ -67,6 +76,7 @@ function init() {
   const width = 16
   const cellCount = width * width
   const cells = []
+
 
   // this is format of grids
 
@@ -107,22 +117,22 @@ function init() {
     setTimeout(createGrids(), 2000)
     setTimeout(placeCruiser(), 10)
     setTimeout(placeTieFighter(), 10)
-    scroller.innerText = 'This is Gold Wing standing by. Tell us how you want us deployed Gold Leader'
+    scroller.innerText = 'This is Gold Wing standing by. Tell us how you want us deployed Commander'
     return playerPlaceReb()
   }
 
   function playerPlaceImp() {
     imperialButtonsBox.style.display = 'flex'
-
-
-
-
+    rebelSide.style.padding = '0 0 49px 0'
+    begin.style.display = 'flex'
 
   }
 
   function playerPlaceReb() {
     rebelButtonsBox.style.display = 'flex'
-
+    // if ()
+    impSide.style.padding = '0 0 49px 0'
+    begin.style.display = 'flex'
 
   }
 
@@ -169,6 +179,9 @@ function init() {
     squareImp[gridPosition + (width * 2)].classList.replace('square', 'ship')
     squareImp[gridPosition + (width * 2) + 1].classList.replace('square', 'ship')
     squareImp[gridPosition + (width * 2) + 2].classList.replace('square', 'ship')
+    tieSelect1.style.display = 'none'
+    impRandom.style.display = 'none'
+
   }
   function placeTieFighter2(gridPosition) {
     const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
@@ -180,6 +193,8 @@ function init() {
     squareImp[gridPosition + (width * 2)].classList.replace('square', 'ship')
     squareImp[gridPosition + (width * 2) + 1].classList.replace('square', 'ship')
     squareImp[gridPosition + (width * 2) + 2].classList.replace('square', 'ship')
+    tieSelect2.style.display = 'none'
+    impRandom.style.display = 'none'
   }
   function placeTieFighter3(gridPosition) {
     const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
@@ -191,6 +206,8 @@ function init() {
     squareImp[gridPosition + (width * 2)].classList.replace('square', 'ship')
     squareImp[gridPosition + (width * 2) + 1].classList.replace('square', 'ship')
     squareImp[gridPosition + (width * 2) + 2].classList.replace('square', 'ship')
+    tieSelect3.style.display = 'none'
+    impRandom.style.display = 'none'
   }
   function placeTieFighter4(gridPosition) {
     const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
@@ -202,11 +219,13 @@ function init() {
     squareImp[gridPosition + (width * 2)].classList.replace('square', 'ship')
     squareImp[gridPosition + (width * 2) + 1].classList.replace('square', 'ship')
     squareImp[gridPosition + (width * 2) + 2].classList.replace('square', 'ship')
+    tieSelect4.style.display = 'none'
+    impRandom.style.display = 'none'
   }
   function placeCruiser1() {
     const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
     gridPosition = 101
-    squareImp[gridPosition - width + 2].classList.replace('square', 'ship')
+    squareImp[gridPosition - width + 2].classList.replace('square', 'ship')                               
     squareImp[gridPosition - width + 3].classList.replace('square', 'ship')
     squareImp[gridPosition - width + 5].classList.replace('square', 'ship')
     squareImp[gridPosition].classList.replace('square', 'ship')
@@ -224,6 +243,8 @@ function init() {
     squareImp[gridPosition + (width * 2) + 2].classList.replace('square', 'ship')
     squareImp[gridPosition + (width * 2) + 3].classList.replace('square', 'ship')
     squareImp[gridPosition + (width * 2) + 5].classList.replace('square', 'ship')
+    cruiserSelect.style.display = 'none'
+    impRandom.style.display = 'none'
   }
 
 
@@ -293,6 +314,8 @@ function init() {
     squareReb[gridPosition + 4].classList.replace('square', 'ship')
     squareReb[gridPosition - width + 1].classList.replace('square', 'ship')
     squareReb[gridPosition + width + 1].classList.replace('square', 'ship')
+    xWingSelect1.style.display = 'none'
+    rebRandom.style.display = 'none'
   }
   function placeXWing2(gridPosition) {
     // ridiculously long code for if any conditions that would cause ships to be partially off grid, or overlapping, to not run. Otherwise place i amount ships.
@@ -305,6 +328,8 @@ function init() {
     squareReb[gridPosition + 4].classList.replace('square', 'ship')
     squareReb[gridPosition - width + 1].classList.replace('square', 'ship')
     squareReb[gridPosition + width + 1].classList.replace('square', 'ship')
+    xWingSelect2.style.display = 'none'
+    rebRandom.style.display = 'none'
   }
   function placeXWing3(gridPosition) {
     // ridiculously long code for if any conditions that would cause ships to be partially off grid, or overlapping, to not run. Otherwise place i amount ships.
@@ -317,6 +342,8 @@ function init() {
     squareReb[gridPosition + 4].classList.replace('square', 'ship')
     squareReb[gridPosition - width + 1].classList.replace('square', 'ship')
     squareReb[gridPosition + width + 1].classList.replace('square', 'ship')
+    xWingSelect3.style.display = 'none'
+    rebRandom.style.display = 'none'
   }
   function placeXWing4(gridPosition) {
     // ridiculously long code for if any conditions that would cause ships to be partially off grid, or overlapping, to not run. Otherwise place i amount ships.
@@ -329,6 +356,8 @@ function init() {
     squareReb[gridPosition + 4].classList.replace('square', 'ship')
     squareReb[gridPosition - width + 1].classList.replace('square', 'ship')
     squareReb[gridPosition + width + 1].classList.replace('square', 'ship')
+    xWingSelect4.style.display = 'none'
+    rebRandom.style.display = 'none'
   }
   function placeFalcon1(gridPosition) {
     const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid div')
@@ -351,6 +380,8 @@ function init() {
     squareReb[gridPosition + (2 * width) + 4].classList.replace('square', 'ship')
     squareReb[gridPosition + (3 * width) + 1].classList.replace('square', 'ship')
     squareReb[gridPosition + (3 * width) + 2].classList.replace('square', 'ship')
+    falconSelect.style.display = 'none'
+    rebRandom.style.display = 'none'
   }
 
 
@@ -531,6 +562,10 @@ function init() {
   chooseRebButton.addEventListener('click', chooseRebel)
 
   chooseImpButton.addEventListener('click', chooseImperial)
+
+  restartButton.addEventListener('click', () => {
+    location = location
+  })
 
   // imperialShot.addEventListener('click', computerShoot)
 
