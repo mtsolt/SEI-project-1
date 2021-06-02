@@ -74,11 +74,15 @@ function init() {
 
   const impBegin = document.querySelector('#impBegin')
 
-  const shots = document.querySelector('#shots')
+  const shots = document.querySelector('#shotsTaken')
 
   const enRem = document.querySelector('#enRem')
+  console.log('enRem', enRem)
 
   const youRem = document.querySelector('#youRem')
+  console.log('youRem', youRem)
+
+  
 
 
   // const imperialShot = document.querySelector('.computerShoot')
@@ -104,6 +108,8 @@ function init() {
   let enemyParts = 46
   let youParts = 46
 
+  youRem.innerText = youParts
+  enRem.innerText = enemyParts
 
 
 
@@ -162,7 +168,6 @@ function init() {
     const num = Math.floor(Math.random() * 2)
     console.log(num, 'num')
     gridReb.addEventListener('click', playerImperialShot)
-  
     if (num === 0) {
       scroller.innerText = "The Rebels dropped out of hyperspace too early, it's your go first!"
       return playerImperialShot()
@@ -179,9 +184,9 @@ function init() {
         // console.log('miss')
         shotsTaken ++
         shots.innerText = shotsTaken
-
-        
         setTimeout(computerRebelShot, 2000)
+      } else if (event.target.classList.contains('hit') || event.target.classList.contains('miss')) {
+        scroller.innerText = "You've already fired there, try again!"
       } else {
         scroller.innerText = 'You hit! You can go again'
         event.target.classList.replace('ship', 'hit')
@@ -189,6 +194,9 @@ function init() {
         shots.innerText = shotsTaken
         enemyParts --
         enRem.innerText = enemyParts
+        if (enemyParts === 0) {
+          return playerImperialWin()
+        }
         // console.log('hit')
         // repeat function
       }
@@ -210,8 +218,11 @@ function init() {
           squareImp[gridPosition].classList.replace('ship', 'hit')
           youParts --
           youRem.innerText = youParts
-          // console.log('Computer hits, it goes again!')
-          setTimeout(computerRebelHit, 2000)
+          if (youParts === 0) {
+            return playerImperialLoss()
+          } else {
+            setTimeout(computerRebelHit, 2000)
+          }
         }
       }
       function computerRebelHit() {
@@ -233,11 +244,20 @@ function init() {
             squareImp[nextShot].classList.replace('ship', 'hit')
             youParts --
             youRem.innerText = youParts
-            // console.log('Computer hits, it goes again!')
-            setTimeout(computerRebelHit, 2000)
+            if (youParts === 0) {
+              return playerImperialLoss()
+            } else {
+              setTimeout(computerRebelHit, 2000)
+            }
           }
         }
       }
+    }
+    function playerImperialWin() {
+      scroller.innerText = 'You have crushed these rebels like the dogs they are. Pick up any of their survivors, we have ways of making them talk. Well done.'
+    }
+    function playerImperialLoss() {
+      scroller.innerText = 'You fool, you have lost the day. Better that you die out there than the Emperor hear of your idiocy. You have lost.'
     }
   }
 
@@ -288,6 +308,8 @@ function init() {
         shots.innerText = shotsTaken
         // console.log('miss')
         setTimeout(computerImperialShot, 2000)
+      } else if (event.target.classList.contains('hit') || event.target.classList.contains('miss')) {
+        scroller.innerText = "You've already fired there, try again!"
       } else {
         event.target.classList.replace('ship', 'hit')
         scroller.innerText = 'You hit! You can go again'
@@ -295,6 +317,9 @@ function init() {
         shots.innerText = shotsTaken
         enemyParts --
         enRem.innerText = enemyParts
+        if (enemyParts === 0) {
+          return playerRebelWin()
+        }
         // console.log('hit')
         // repeat function
       }
@@ -315,8 +340,11 @@ function init() {
           scroller.innerText = 'The computer hit, it will go again'
           youParts --
           youRem.innerText = youParts
-          // console.log('Computer hits, it goes again!')
-          setTimeout(computerImpHit, 2000)
+          if (youParts === 0) {
+            return playerRebelLoss()
+          } else {
+            setTimeout(computerImpHit, 2000)
+          }
         }
       }
       function computerImpHit() {
@@ -338,11 +366,22 @@ function init() {
             scroller.innerText = 'The computer hit, it will go again'
             youParts --
             youRem.innerText = youParts
+            if (youParts === 0) {
+              return playerRebelLoss()
+            } else {
+              setTimeout(computerImpHit, 2000)
+            }
             // console.log('Computer hits, it goes again!')
-            setTimeout(computerImpHit, 2000)
+            
           }
         }
       }
+    }
+    function playerRebelWin() {
+      scroller.innerText = 'You have won! The Imperial fleet will surely suffer as a result of this victory. Well done Commander!'
+    }
+    function playerRebelLoss() {
+      scroller.innerText = "Commander, we can't sustain these losses any longer, pull back what remains of your group. We have lost this day."
     }
   }
 
