@@ -28,6 +28,10 @@ function init() {
   // selects the scroller
   const counters = document.querySelector('#counters')
 
+  const gridLeft = document.querySelector('#rebelSide .grid')
+
+  const gridRight = document.querySelector('#impSide .grid')
+
   const main = document.querySelector('main')
   console.log('main', main)
 
@@ -44,13 +48,13 @@ function init() {
 
   // Rebel start button
   const chooseRebButton = document.createElement('button')
-  chooseRebButton.innerText = 'REBEL'
+  chooseRebButton.innerText = 'REBEL ALLIANCE'
   chooseRebButton.style.padding = '30%'
   chooseRebButton.style.background = 'none'
   chooseRebButton.style.border = 'none'
   // Imperial start button
   const chooseImpButton = document.createElement('button')
-  chooseImpButton.innerText = 'IMPERIAL'
+  chooseImpButton.innerText = 'IMPERIAL FLEET'
   chooseImpButton.style.padding = '30%'
   chooseImpButton.style.background = 'none'
   chooseImpButton.style.border = 'none'
@@ -115,17 +119,19 @@ function init() {
   const cells = []
   const rebDeployed = []
   const impDeployed = []
-  let value = 0
-  const xWing = [value, value + 1, value + 3, value + 4, value - width + 1, value + width + 1]
-  console.log('xWing', xWing)
-  const falcon = []
+  // let gridPosition = 0
+  // const xWing = [gridPosition, gridPosition + 1, gridPosition +2, gridPosition + 3, gridPosition + 4, gridPosition - width + 1, gridPosition + width + 1]
+  // console.log('xWing', xWing)
+  // const falcon = [gridPosition, value - width + 1, gridPosition - width + 2, gridPosition + 1, gridPosition + 2, gridPosition + 3, gridPosition + 4, gridPosition + width, gridPosition + width + 1, gridPosition + width + 2, gridPosition + width + 3, gridPosition + (2 * width), gridPosition + (2 * width) + 1, gridPosition + (2 * width) + 2, gridPosition + (2 * width) + 3, gridPosition + (2 * width) + 4]
   
-  function placeXWing (gridPosition) {
-    let value = gridPosition
-    xWing.forEach(item => {
-      item.classList.replace('square', 'ship')
-    })
-  }
+
+
+  // function placeXWing (gridPosition) {
+  //   let value = gridPosition
+  //   xWing.forEach(item => {
+  //     item.classList.replace('square', 'ship')
+  //   })
+  // }
   
 
 
@@ -167,7 +173,6 @@ function init() {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
       cell.classList.add('square')
-      cell.innerHTML = i
       gridReb.appendChild(cell) // rebel grid
       cells.push(cell)
       // console.log('this is gridReb', gridReb)
@@ -177,7 +182,6 @@ function init() {
       const cell = document.createElement('div')
       // console.log('cell', cell)
       cell.classList.add('square')
-      cell.innerHTML = i
       gridImp.appendChild(cell) //imperial grid
       cells.push(cell)
     }
@@ -186,9 +190,15 @@ function init() {
   function chooseImperial() {
     gridImp.removeChild(chooseImpButton)
     gridReb.removeChild(chooseRebButton)
+    gridReb.style.backgroundImage = 'url("../Images/left.png")'
+    gridImp.style.backgroundImage = 'url("../Images/right.png")'
     setTimeout(createGrids(), 2000)
     setTimeout(placeFalcon(), 10)
     setTimeout(placeXWing(), 10)
+    cells.forEach(item => {
+      item.classList.replace('ship', 'enemyShip')
+    })
+    console.log('cells', cells)
     scroller.innerText = 'Your loyalty to the Emperor will be rewarded Captain. Crush these Rebel scum'
     imperialButtonsBox.style.display = 'flex'
     rebelSide.style.padding = '0 0 49px 0'
@@ -228,7 +238,7 @@ function init() {
         scroller.innerText = "You've already fired there, try again!"
       } else {
         scroller.innerText = 'You hit! You can go again'
-        event.target.classList.replace('ship', 'hit')
+        event.target.classList.replace('enemyShip', 'hit')
         shotsTaken++
         shots.innerText = shotsTaken
         enemyParts--
@@ -325,9 +335,14 @@ function init() {
   function chooseRebel() {
     gridReb.removeChild(chooseRebButton)
     gridImp.removeChild(chooseImpButton)
+    gridReb.style.backgroundImage = 'url("../Images/left.png")'
+    gridImp.style.backgroundImage = 'url("../Images/right.png")'
     setTimeout(createGrids(), 2000)
     setTimeout(placeCruiser(), 10)
     setTimeout(placeTieFighter(), 10)
+    cells.forEach(item => {
+      item.classList.replace('ship', 'enemyShip')
+    })
     scroller.innerText = 'This is Gold Wing standing by. Tell us how you want us deployed Commander'
     rebelButtonsBox.style.display = 'flex'
     impSide.style.padding = '0 0 49px 0'
@@ -369,7 +384,7 @@ function init() {
       } else if (event.target.classList.contains('hit') || event.target.classList.contains('miss')) {
         scroller.innerText = "You've already fired there, try again!"
       } else {
-        event.target.classList.replace('ship', 'hit')
+        event.target.classList.replace('enemyShip', 'hit')
         scroller.innerText = 'You hit! You can go again'
         shotsTaken++
         shots.innerText = shotsTaken
