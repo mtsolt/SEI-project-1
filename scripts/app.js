@@ -28,12 +28,18 @@ function init() {
   // selects the scroller
   const counters = document.querySelector('#counters')
 
+  const main = document.querySelector('main')
+  console.log('main', main)
+
 
   const rebelButtonsBox = document.querySelector('#rebel')
   // console.log(rebelButtonsBox, 'rebelButtonsBox')
 
   const imperialButtonsBox = document.querySelector('#imperial')
   // console.log(imperialButtonsBox, 'imperialButtonsBox')
+
+  const finish = document.querySelectorAll('#rebelSide, #center, #impSide')
+  console.log('finish', finish)
 
 
   // Rebel start button
@@ -54,6 +60,22 @@ function init() {
   restartButton.innerText = 'Restart Game'
   restartButton.style.display = 'flex'
   restartButton.style.justifyContent = 'center'
+
+  // game end options
+
+  const playerImperialWin = document.createElement('section')
+  playerImperialWin.innerText = 'You have crushed these rebels like the dogs they are. Pick up any of their survivors, we have ways of making them talk. Well done.'
+
+
+  const playerImperialLoss = document.createElement('section')
+  playerImperialLoss.innerText = 'You fool, you have lost the day. Better that you die out there than the Emperor hear of your idiocy.'
+
+  const playerRebelWin = document.createElement('section')
+  playerRebelWin.innerText = 'You have won! The Imperial fleet will surely suffer as a result of this victory. Well done Commander!'
+
+  const playerRebelLoss = document.createElement('section')
+  playerRebelLoss.innerText = "Commander, we can't sustain these losses any longer, pull back what remains of your group. We have lost this day."
+
 
   // Button selects.
   const tieSelect1 = document.querySelector('#tieSelect1')
@@ -82,7 +104,7 @@ function init() {
   const youRem = document.querySelector('#youRem')
   console.log('youRem', youRem)
 
-  
+
 
 
   // const imperialShot = document.querySelector('.computerShoot')
@@ -93,6 +115,23 @@ function init() {
   const cells = []
   const rebDeployed = []
   const impDeployed = []
+  let value = 0
+  const xWing = [value, value + 1, value + 3, value + 4, value - width + 1, value + width + 1]
+  console.log('xWing', xWing)
+  const falcon = []
+  
+  function placeXWing (gridPosition) {
+    let value = gridPosition
+    xWing.forEach(item => {
+      item.classList.replace('square', 'ship')
+    })
+  }
+  
+
+
+  // function aWingPlace(positionosition) {
+  //   aWing.forEach(value)
+  // }
 
 
 
@@ -182,7 +221,7 @@ function init() {
         event.target.classList.replace('square', 'miss')
         scroller.innerText = "You missed! It's the computer's go"
         // console.log('miss')
-        shotsTaken ++
+        shotsTaken++
         shots.innerText = shotsTaken
         setTimeout(computerRebelShot, 2000)
       } else if (event.target.classList.contains('hit') || event.target.classList.contains('miss')) {
@@ -190,12 +229,12 @@ function init() {
       } else {
         scroller.innerText = 'You hit! You can go again'
         event.target.classList.replace('ship', 'hit')
-        shotsTaken ++
+        shotsTaken++
         shots.innerText = shotsTaken
-        enemyParts --
+        enemyParts--
         enRem.innerText = enemyParts
         if (enemyParts === 0) {
-          return playerImperialWin()
+          return playerImpWin()
         }
         // console.log('hit')
         // repeat function
@@ -216,10 +255,10 @@ function init() {
         } else {
           scroller.innerText = 'The computer hit! It will go again'
           squareImp[gridPosition].classList.replace('ship', 'hit')
-          youParts --
+          youParts--
           youRem.innerText = youParts
           if (youParts === 0) {
-            return playerImperialLoss()
+            return playerImpLoss()
           } else {
             setTimeout(computerRebelHit, 2000)
           }
@@ -242,10 +281,10 @@ function init() {
           } else {
             scroller.innerText = 'The computer hit! It will go again'
             squareImp[nextShot].classList.replace('ship', 'hit')
-            youParts --
+            youParts--
             youRem.innerText = youParts
             if (youParts === 0) {
-              return playerImperialLoss()
+              return playerImpLoss()
             } else {
               setTimeout(computerRebelHit, 2000)
             }
@@ -253,14 +292,34 @@ function init() {
         }
       }
     }
-    function playerImperialWin() {
-      scroller.innerText = 'You have crushed these rebels like the dogs they are. Pick up any of their survivors, we have ways of making them talk. Well done.'
-    }
-    function playerImperialLoss() {
-      scroller.innerText = 'You fool, you have lost the day. Better that you die out there than the Emperor hear of your idiocy. You have lost.'
-    }
   }
 
+  function playerImpWin() {
+    finish.forEach(item => {
+      item.style.display = 'none'
+    })
+    main.appendChild(playerImperialWin)
+  }
+
+  function playerImpLoss() {
+    finish.forEach(item => {
+      item.style.display = 'none'
+    })
+    main.appendChild(playerImperialLoss)
+  }
+
+  function playerRebWin() {
+    finish.forEach(item => {
+      item.style.display = 'none'
+    })
+    main.appendChild(playerRebelWin)
+  }
+  function playerRebLoss() {
+    finish.forEach(item => {
+      item.style.display = 'none'
+    })
+    main.appendChild(playerRebelLoss)
+  }
 
 
   function chooseRebel() {
@@ -280,7 +339,7 @@ function init() {
     scroller.innerText = ''
     rebBegin.style.display = 'none'
     playerRebel()
-    
+
   }
 
   function playerRebel() {
@@ -296,7 +355,6 @@ function init() {
       setTimeout(computerImperialShot, 4000)
     }
 
-    
     function playerRebelShot(event) {
       scroller.innerText = 'It is your go! Click on a square to take a shot'
       // console.log('click Rebel')
@@ -304,7 +362,7 @@ function init() {
       if (event.target.classList.contains('square')) {
         event.target.classList.replace('square', 'miss')
         scroller.innerText = "You missed! It's the computer's go"
-        shotsTaken ++
+        shotsTaken++
         shots.innerText = shotsTaken
         // console.log('miss')
         setTimeout(computerImperialShot, 2000)
@@ -313,12 +371,12 @@ function init() {
       } else {
         event.target.classList.replace('ship', 'hit')
         scroller.innerText = 'You hit! You can go again'
-        shotsTaken ++
+        shotsTaken++
         shots.innerText = shotsTaken
-        enemyParts --
+        enemyParts--
         enRem.innerText = enemyParts
         if (enemyParts === 0) {
-          return playerRebelWin()
+          return playerRebWin()
         }
         // console.log('hit')
         // repeat function
@@ -338,10 +396,10 @@ function init() {
         } else {
           squareReb[gridPosition].classList.replace('ship', 'hit')
           scroller.innerText = 'The computer hit, it will go again'
-          youParts --
+          youParts--
           youRem.innerText = youParts
           if (youParts === 0) {
-            return playerRebelLoss()
+            return playerRebLoss()
           } else {
             setTimeout(computerImpHit, 2000)
           }
@@ -364,24 +422,18 @@ function init() {
           } else {
             squareReb[nextShot].classList.replace('ship', 'hit')
             scroller.innerText = 'The computer hit, it will go again'
-            youParts --
+            youParts--
             youRem.innerText = youParts
             if (youParts === 0) {
-              return playerRebelLoss()
+              return playerRebLoss()
             } else {
               setTimeout(computerImpHit, 2000)
             }
             // console.log('Computer hits, it goes again!')
-            
+
           }
         }
       }
-    }
-    function playerRebelWin() {
-      scroller.innerText = 'You have won! The Imperial fleet will surely suffer as a result of this victory. Well done Commander!'
-    }
-    function playerRebelLoss() {
-      scroller.innerText = "Commander, we can't sustain these losses any longer, pull back what remains of your group. We have lost this day."
     }
   }
 
@@ -509,7 +561,7 @@ function init() {
     for (let i = 0; i < 4; i++) { // ridiculously long code for if any conditions that would cause ships to be partially off grid, or overlapping, to not run. Otherwise place i amount ships. 
       const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
       gridPosition = Math.floor(Math.random() * squareImp.length)
-      if (gridPosition % width === width - 2 || gridPosition % width === width - 1 || gridPosition >= ((width * width) - (width * 2) - 3)  || squareImp[gridPosition].classList.contains('ship') || squareImp[gridPosition + 1].classList.contains('ship') || squareImp[gridPosition + 2].classList.contains('ship') || squareImp[gridPosition + width].classList.contains('ship') || squareImp[gridPosition + width + 1].classList.contains('ship') || squareImp[gridPosition + width + 2].classList.contains('ship') || squareImp[gridPosition + (width * 2)].classList.contains('ship') || squareImp[gridPosition + (width * 2) + 1].classList.contains('ship') || squareImp[gridPosition + (width * 2) + 2].classList.contains('ship')) {
+      if (gridPosition % width === width - 2 || gridPosition % width === width - 1 || gridPosition >= ((width * width) - (width * 2) - 3) || squareImp[gridPosition].classList.contains('ship') || squareImp[gridPosition + 1].classList.contains('ship') || squareImp[gridPosition + 2].classList.contains('ship') || squareImp[gridPosition + width].classList.contains('ship') || squareImp[gridPosition + width + 1].classList.contains('ship') || squareImp[gridPosition + width + 2].classList.contains('ship') || squareImp[gridPosition + (width * 2)].classList.contains('ship') || squareImp[gridPosition + (width * 2) + 1].classList.contains('ship') || squareImp[gridPosition + (width * 2) + 2].classList.contains('ship')) {
         i--
       } else { // this is the code for the template of the tie fighter - must be a way to have this in single variable, which can then be used to rotate, and display image when whole ship gone. 
         squareImp[gridPosition].classList.replace('square', 'ship')
@@ -675,6 +727,8 @@ function init() {
   }
 
 
+
+
   //? Deploys the rebel ships randomly when player chooses Imperial --------------------------------------------------------------------------------------------------
   // deploy xwings
   function placeXWing() {
@@ -771,7 +825,7 @@ function init() {
     placeTieFighter()
     placeCruiser()
     removeImpRandomly()
-    if (impDeployed.length === 5){ 
+    if (impDeployed.length === 5) {
       impBegin.style.display = 'flex'
     }
   })
@@ -785,7 +839,7 @@ function init() {
     placeXWing()
     placeFalcon()
     removeRebRandomly()
-    if (rebDeployed.length === 5){ 
+    if (rebDeployed.length === 5) {
       rebBegin.style.display = 'flex'
     }
   })
