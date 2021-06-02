@@ -3,8 +3,7 @@
 
 <head>
   <link href="https://allfont.net/allfont.css?fonts=star-jedi" rel="stylesheet" type="text/css">
-
-  <!-- <Access-Control-Allow-Origin: https://allfont.net/allfont.css?fonts=star-jedi></Access-Control-Allow-Origin:>  need to give access here to avoid the COR error. Not sure how. -->
+  <!-- Access-Control-Allow-Origin: https://allfont.net/allfont.css?fonts=star-jedi need to give access here to avoid the COR error. Not sure how. -->
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +14,7 @@
 
 <body>
   <content>
-    <header>STAR WARS<br>BATTLE SHIP </header>
+    <header>STAR WARS<br><span id='battleship'>BATTLESHIPS</span></header>
     <main>
       <section id='rebelSide'>
         <div class='grid-wrapper'>
@@ -32,14 +31,22 @@
         </div>
       </section>
       <section id='center'>
-        <button id ='begin'>Begin Battle</button>
+        <div id='counters'>
+          <p id='shots'>Shots Taken: <span id='shots'>0</span></p>
+          <p id='shipParts'>Enemy Ships parts remaining: <span id='enRem'>0</span></p>
+          <p id='yourParts'>Your Ship parts remaining: <span i='youRem'>0</span></p>
+          </div>
+
+        <button id ='rebBegin'>Begin Battle</button>
+        <button id ='impBegin'>Begin Battle</button>
         <div id='scroller'> The REBEL ALLIANCE are making a daring attack on the IMPERIAL fleet, do you have what it
           takes to survive? </div>
         <div id='start-game'>
           <button id='start-button'>Start Game</button>
+        </div>
 
           
-        </div>
+        
       </section>
       <section id='impSide'>
         <div class='grid-wrapper'>
