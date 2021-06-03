@@ -20,39 +20,24 @@
         <div class='grid-wrapper'>
           <div class='grid'></div>
         </div>
-        <div class='buttonsBox' id='rebel'>
-          <span class= 'rebButtonsBox' id='rebDeploy'>Deploy your: </span>
-          <button class='rebButtonsBox' id='xSelect'>X-Wing 1</button>
-          <button class='rebButtonsBox' id='bSelect'>B-Wing 2</button>
-          <button class='rebButtonsBox' id='aSelect'>A-Wing 3</button>
-          <button class='rebButtonsBox' id='ySelect'>Y-Wing 4</button>
-          <button class='rebButtonsBox' id='falconSelect'>Falcon 5</button>
-          <button class='rebButtonsBox' id='rebRandom'>Randomly</button>
-          <button class='rebButtonsBox' id='rebRedeploy'>Redeploy Ships?</button>
-        </div>
       </section>
       <section id='center'>
-        <div id='counters'>
-          <p id='shots'>Shots Taken: <span id='shotsTaken'>0</span></p>
-          <p id='shipParts'>Enemy Ships parts remaining: <span id='enRem'>0</span></p>
-          <p id='yourParts'>Your Ship parts remaining: <span id='youRem'>0</span></p>
-          </div>
-
-        <button id ='rebBegin'>Begin Battle</button>
-        <button id ='impBegin'>Begin Battle</button>
         <div id='scroller'> The REBEL ALLIANCE are making a daring attack on the IMPERIAL fleet, do you have what it
           takes to survive? </div>
+          <button id ='rebBegin'>Begin Battle</button>
+          <button id ='impBegin'>Begin Battle</button>
         <div id='start-game'>
           <button id='start-button'>Start Game</button>
         </div>
-
-          
-        
       </section>
       <section id='impSide'>
         <div class='grid-wrapper'>
           <div class='grid'></div>
         </div>
+      </section>
+    </main>
+    <footer>
+      <section>
         <div class='buttonsBox' id='imperial'>
           <span class= 'impButtonsBox' id='impDeploy'>Deploy your: </span>
           <button class= 'impButtonsBox' id='tieSelect'>Tie Fighter 1</button>
@@ -60,15 +45,26 @@
           <button class= 'impButtonsBox' id='tieInterceptor'>Tie Interceptor 3</button>
           <button class= 'impButtonsBox' id='tieBomber'>Tie Bomber 4</button>
           <button class= 'impButtonsBox' id='cruiserSelect'>Cruiser 5</button>
-          <button class='impButtonsBox' id='impRandom'>Randomly</button>
-          <button class='impButtonsBox' id='impRedeploy'>Redeploy Ships?</button>
-          <!-- <button class='computerShoot'>Computer Shot</button> -->
-        </div>
+          <button class='impButtonsBox' id='impRandom'>Randomise</button>
+          <button class='impButtonsBox' id='impRedeploy'>Redeploy?</button>
       </section>
-    </main>
-    <footer>
-      IN HERE WE HAVE THE SHIPS LEFT
-      MAYBE ALSO THE BUTTONS TO SELECT DIFFERENT TYPES OF SHOT
+      <section>
+        <div class='buttonsBox' id='rebel'>
+          <span class= 'rebButtonsBox' id='rebDeploy'>Deploy your: </span>
+          <button class='rebButtonsBox' id='xSelect'>X-Wing 1</button>
+          <button class='rebButtonsBox' id='bSelect'>B-Wing 2</button>
+          <button class='rebButtonsBox' id='aSelect'>A-Wing 3</button>
+          <button class='rebButtonsBox' id='ySelect'>Y-Wing 4</button>
+          <button class='rebButtonsBox' id='falconSelect'>Falcon 5</button>
+          <button class='rebButtonsBox' id='rebRandom'>Randomise</button>
+          <button class='rebButtonsBox' id='rebRedeploy'>Redeploy?</button>
+        </div>
+        <div id='counters'>
+          <p id='yourParts'>Your Ship parts remaining: <span id='youRem'>0</span></p>
+          <p id='shots'>Shots Taken: <span id='shotsTaken'>0</span></p>
+          <p id='shipParts'>Enemy Ships parts remaining: <span id='enRem'>0</span></p>
+          </div>
+      </section>
     </footer>
   </content>
 </body>

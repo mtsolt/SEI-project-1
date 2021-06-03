@@ -15,25 +15,25 @@ function init() {
   // this creates const for the rebel side
   const gridImp = document.querySelector('#impSide .grid-wrapper .grid')
   // this creastes const for imp side
-  const gridSquare = document.querySelectorAll('.grid')
+  // const gridSquare = document.querySelectorAll('.grid') <---Doesn't exist yet
   // selects the grids
   const square = document.querySelectorAll('.square')
   // selects all squares
-  const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
+  // const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div') <---Doesn't exist yet
   // console.log('this is squareImp', squareImp)
   // selects all squares on Imp
-  const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid div')
+  // const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid div') <---Doesn't exist yet
   // selects all squares on Reb
   const scroller = document.querySelector('#scroller')
   // selects the scroller
   const counters = document.querySelector('#counters')
 
-  const gridLeft = document.querySelector('#rebelSide .grid')
+  // const gridLeft = document.querySelector('#rebelSide .grid') <---Doesn't exist yet
 
-  const gridRight = document.querySelector('#impSide .grid')
+  // const gridRight = document.querySelector('#impSide .grid') <---Doesn't exist yet
 
   const main = document.querySelector('main')
-  console.log('main', main)
+  // console.log('main', main)
 
 
   const rebelButtonsBox = document.querySelector('#rebel')
@@ -47,21 +47,26 @@ function init() {
 
   // Ending 
   const finish = document.querySelectorAll('#rebelSide, #center, #impSide')
-  console.log('finish', finish)
+  // console.log('finish', finish)
 
 
   // Rebel start button
   const chooseRebButton = document.createElement('button')
   chooseRebButton.innerText = 'REBEL ALLIANCE'
-  chooseRebButton.style.padding = '30%'
+  chooseRebButton.style.color = 'white'
+  chooseRebButton.style.padding = '45%'
   chooseRebButton.style.background = 'none'
   chooseRebButton.style.border = 'none'
+  chooseRebButton.style.fontSize = 'larger'
   // Imperial start button
   const chooseImpButton = document.createElement('button')
   chooseImpButton.innerText = 'IMPERIAL FLEET'
-  chooseImpButton.style.padding = '30%'
+  chooseImpButton.style.color = 'white'
+  chooseImpButton.style.padding = '45%'
   chooseImpButton.style.background = 'none'
   chooseImpButton.style.border = 'none'
+  chooseImpButton.style.fontSize = 'larger'
+
 
   //redploy button
 
@@ -72,6 +77,9 @@ function init() {
   restartButton.innerText = 'Restart Game'
   restartButton.style.display = 'flex'
   restartButton.style.justifyContent = 'center'
+  restartButton.style.padding = '10px'
+  restartButton.style.fontSize = 'larger'
+  restartButton.style.margin = '5px'
 
   // game end options
 
@@ -114,12 +122,12 @@ function init() {
   const shots = document.querySelector('#shotsTaken')
 
   const enRem = document.querySelector('#enRem')
-  console.log('enRem', enRem)
+  // console.log('enRem', enRem)
 
   const youRem = document.querySelector('#youRem')
-  console.log('youRem', youRem)
+  // console.log('youRem', youRem)
 
-  let shoot = 0
+
 
 
   // const imperialShot = document.querySelector('.computerShoot')
@@ -163,7 +171,7 @@ function init() {
   let shotsTaken = 0
   let enemyParts = 46
   let youParts = 46
-
+  let shoot = 0
   youRem.innerText = youParts
   enRem.innerText = enemyParts
 
@@ -202,7 +210,11 @@ function init() {
     gridImp.removeChild(chooseImpButton)
     gridReb.removeChild(chooseRebButton)
     gridReb.style.backgroundImage = 'url("../Images/left.png")'
+    gridReb.style.backgroundColor = 'none'
+    gridReb.style.border = 'solid #2d6826 5px'
     gridImp.style.backgroundImage = 'url("../Images/right.png")'
+    gridImp.style.border = 'solid #2d6826 5px'
+    gridImp.style.backgroundColor = 'none'
     setTimeout(createGrids(), 2000)
     setTimeout(placeFalcon(), 10)
     setTimeout(placeXWing(), 10)
@@ -212,10 +224,9 @@ function init() {
     cells.forEach(item => {
       item.classList.replace('ship', 'enemyShip')
     })
-    console.log('cells', cells)
+    // console.log('cells', cells)
     scroller.innerText = 'Your loyalty to the Emperor will be rewarded Captain. Crush these Rebel scum'
     imperialButtonsBox.style.display = 'flex'
-    rebelSide.style.padding = '0 0 49px 0'
   }
 
   function imperialBattle() {
@@ -229,11 +240,12 @@ function init() {
   function playerImperial() {
     counters.style.display = 'flex'
     const num = Math.floor(Math.random() * 2)
-    console.log(num, 'num')
+    // console.log(num, 'num')
     gridReb.addEventListener('click', playerImperialShot)
     if (num === 0) {
       scroller.innerText = "The Rebels dropped out of hyperspace too early, it's your go first!"
       shoot = 1
+      // console.log('shoot', shoot)
       return playerImperialShot()
     } else if (num === 1) {
       scroller.innerText = 'The Rebels are here! Watch out, they are going first!'
@@ -242,13 +254,14 @@ function init() {
 
     function playerImperialShot(event) {
       scroller.innerText = 'It is your go!'
-      if (shoot !== false) {
+      if (shoot !== 0) {
         if (event.target.classList.contains('square')) {
           event.target.classList.replace('square', 'miss')
           scroller.innerText = "You missed! It's the computer's go"
           // console.log('miss')
           shotsTaken++
           shots.innerText = shotsTaken
+          shoot = 0
           setTimeout(computerRebelShot, 2000)
         } else if (event.target.classList.contains('hit') || event.target.classList.contains('miss')) {
           scroller.innerText = "You've already fired there, try again!"
@@ -265,12 +278,11 @@ function init() {
           // console.log('hit')
           // repeat function
         }
-        shoot = 0
       }
     }
+
     function computerRebelShot() {
       scroller.innerText = "It is the computer's go"
-      // console.log('computer shoots')
       for (let i = 0; i < 1; i++) {
         const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
         gridPosition = Math.floor(Math.random() * squareImp.length)
@@ -299,6 +311,7 @@ function init() {
           const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
           const hitBox = []
           hitBox.push(gridPosition - 1, gridPosition + 1, gridPosition - width - 1, gridPosition - width, gridPosition - width + 1, gridPosition + width - 1, gridPosition + width, gridPosition + width + 1)
+          // console.log(hitBox, 'hitBox')
           shotPosition = Math.floor(Math.random() * hitBox.length)
           nextShot = hitBox.slice(shotPosition, shotPosition + 1)
           // console.log('nextshot', nextShot)
@@ -310,6 +323,8 @@ function init() {
             return playerImperialShot()
           } else if (squareImp[nextShot].classList.contains('miss') || squareImp[nextShot].classList.contains('hit')) {
             i--
+          } else if (squareImp[gridPosition - 1].classList.contains('miss') || squareImp[gridPosition - 1].classList.contains('hit') && squareImp[gridPosition + 1].classList.contains('miss') || squareImp[gridPosition + 1].classList.contains('hit') && squareImp[gridPosition - width - 1].classList.contains('miss') || squareImp[gridPosition - width - 1].classList.contains('hit') && squareImp[gridPosition - width].classList.contains('miss') || squareImp[gridPosition - width].classList.contains('hit') && squareImp[gridPosition - width + 1].classList.contains('miss') || squareImp[gridPosition - width + 1].classList.contains('hit') && squareImp[gridPosition + width - 1].classList.contains('miss') || squareImp[gridPosition + width - 1].classList.contains('hit') && squareImp[gridPosition + width].classList.contains('miss') || squareImp[gridPosition + width].classList.contains('hit') && squareImp[gridPosition + width + 1].classList.contains('miss') || squareImp[gridPosition + width + 1].classList.contains('hit')) {
+            return computerRebelShot()
           } else {
             scroller.innerText = 'The computer hit! It will go again'
             squareImp[nextShot].classList.replace('ship', 'hit')
@@ -346,7 +361,11 @@ function init() {
     gridReb.removeChild(chooseRebButton)
     gridImp.removeChild(chooseImpButton)
     gridReb.style.backgroundImage = 'url("../Images/left.png")'
+    gridReb.style.backgroundColor = 'none'
+    gridReb.style.border = 'solid #2d6826 5px'
     gridImp.style.backgroundImage = 'url("../Images/right.png")'
+    gridImp.style.border = 'solid #2d6826 5px'
+    gridImp.style.backgroundColor = 'none'
     setTimeout(createGrids(), 2000)
     setTimeout(placeCruiser(), 10)
     setTimeout(placeTieFighter(), 10)
@@ -358,7 +377,6 @@ function init() {
     })
     scroller.innerText = 'This is Gold Wing standing by. Tell us how you want us deployed Commander'
     rebelButtonsBox.style.display = 'flex'
-    impSide.style.padding = '0 0 49px 0'
   }
 
   function rebelBattle() {
@@ -367,7 +385,6 @@ function init() {
     scroller.innerText = ''
     rebBegin.style.display = 'none'
     playerRebel()
-
   }
 
   function playerRebel() {
@@ -381,15 +398,14 @@ function init() {
       return playerRebelShot()
     } else if (num === 1) {
       scroller.innerText = 'The Imperials saw us coming and are going first!'
-      shoot = 0
-      setTimeout(computerImperialShot, 4000)
+      setTimeout(computerImperialShot, 3000)
     }
 
     function playerRebelShot(event) {
       scroller.innerText = 'It is your go! Click on a square to take a shot'
       // console.log('click Rebel')
       // console.log(event.target, 'event target')
-      if (shoot !== false) {
+      if (shoot !== 0) {
         if (event.target.classList.contains('square')) {
           event.target.classList.replace('square', 'miss')
           scroller.innerText = "You missed! It's the computer's go"
@@ -417,70 +433,74 @@ function init() {
     }
     function computerImperialShot() {
       // console.log('computer shoots')
-      const isHit = item => item.classList = 'hit'
-      let compShot = squareReb.forEach(item => {
-        item.findIndex(isHit)
-      })
-      if (compShot !== -1) {
-        return computerImpHit(compShot + 1)
-      } else {
-        for (let i = 0; i < 1; i++) {
-          const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid div')
-          gridPosition = Math.floor(Math.random() * squareReb.length)
-          if (squareReb[gridPosition].classList.contains('square')) {
-            squareReb[gridPosition].classList.replace('square', 'miss')
-            // console.log('computer miss')
-            scroller.innerText = ("The Imperial fleet missed, it is your go!")
-            shoot = 1
-            return playerRebelShot()
-          } else if (squareReb[gridPosition].classList.contains('miss') || squareReb[gridPosition].classList.contains('hit')) {
-            i--
+      // const rebelCells = cells.slice(0, 196)
+      // console.log('rebelCells', rebelCells)
+      // const isHit = item => item.classList = 'hit'
+      // let compShot = squareReb.forEach(item => {
+      //   item.findIndex(isHit)
+      // })
+      // if (compShot !== -1) {
+      //   return computerImpHit(compShot + 1)
+      // } else {
+      for (let i = 0; i < 1; i++) {
+        const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid div')
+        gridPosition = Math.floor(Math.random() * squareReb.length)
+        if (squareReb[gridPosition].classList.contains('square')) {
+          squareReb[gridPosition].classList.replace('square', 'miss')
+          // console.log('computer miss')
+          scroller.innerText = ("The Imperial fleet missed, it is your go!")
+          shoot = 1
+          return playerRebelShot()
+        } else if (squareReb[gridPosition].classList.contains('miss') || squareReb[gridPosition].classList.contains('hit')) {
+          i--
+        } else {
+          squareReb[gridPosition].classList.replace('ship', 'hit')
+          scroller.innerText = 'The computer hit, it will go again'
+          youParts--
+          youRem.innerText = youParts
+          if (youParts === 0) {
+            return playerRebLoss()
           } else {
-            squareReb[gridPosition].classList.replace('ship', 'hit')
-            scroller.innerText = 'The computer hit, it will go again'
-            youParts--
-            youRem.innerText = youParts
-            if (youParts === 0) {
-              return playerRebLoss()
-            } else {
-              setTimeout(computerImpHit, 2000)
-            }
-          }
-        }
-      }
-      function computerImpHit(gridPosition) {
-        for (let i = 0; i < 1; i++) {
-          const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid div')
-          const hitBox = []
-          hitBox.push(gridPosition - 1, gridPosition + 1, gridPosition - width - 1, gridPosition - width, gridPosition - width + 1, gridPosition + width - 1, gridPosition + width, gridPosition + width + 1)
-          shotPosition = Math.floor(Math.random() * hitBox.length)
-          nextShot = hitBox.slice(shotPosition, shotPosition + 1)
-          // console.log('nextshot', nextShot)
-          if (squareReb[nextShot].classList.contains('square')) {
-            squareReb[nextShot].classList.replace('square', 'miss')
-            // console.log('computer miss')
-            scroller.innerText = ("The Imperial fleet missed, it is your go!")
-            shoot = 1
-            return playerRebelShot()
-          } else if (squareReb[nextShot].classList.contains('miss') || squareReb[nextShot].classList.contains('hit')) {
-            i--
-          } else {
-            squareReb[nextShot].classList.replace('ship', 'hit')
-            scroller.innerText = 'The computer hit, it will go again'
-            youParts--
-            youRem.innerText = youParts
-            if (youParts === 0) {
-              return playerRebLoss()
-            } else {
-              setTimeout(computerImpHit, 2000)
-            }
-            // console.log('Computer hits, it goes again!')
-
+            setTimeout(computerImpHit, 2000)
           }
         }
       }
     }
+    function computerImpHit(gridPosition) {
+      for (let i = 0; i < 1; i++) {
+        const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid div')
+        const hitBox = []
+        hitBox.push(gridPosition - 1, gridPosition + 1, gridPosition - width - 1, gridPosition - width, gridPosition - width + 1, gridPosition + width - 1, gridPosition + width, gridPosition + width + 1)
+        shotPosition = Math.floor(Math.random() * hitBox.length)
+        nextShot = hitBox.slice(shotPosition, shotPosition + 1)
+        // console.log('nextshot', nextShot)
+        if (squareReb[nextShot].classList.contains('square')) {
+          squareReb[nextShot].classList.replace('square', 'miss')
+          // console.log('computer miss')
+          scroller.innerText = ("The Imperial fleet missed, it is your go!")
+          shoot = 1
+          return playerRebelShot()
+        } else if (squareReb[nextShot].classList.contains('miss') || squareReb[nextShot].classList.contains('hit')) {
+          i--
+        } else if (squareReb[gridPosition - 1].classList.contains('miss') || squareReb[gridPosition - 1].classList.contains('hit') && squareReb[gridPosition + 1].classList.contains('miss') || squareReb[gridPosition + 1].classList.contains('hit') && squareReb[gridPosition - width - 1].classList.contains('miss') || squareReb[gridPosition - width - 1].classList.contains('hit') && squareReb[gridPosition - width].classList.contains('miss') || squareReb[gridPosition - width].classList.contains('hit') && squareReb[gridPosition - width + 1].classList.contains('miss') || squareReb[gridPosition - width + 1].classList.contains('hit') && squareReb[gridPosition + width - 1].classList.contains('miss') || squareReb[gridPosition + width - 1].classList.contains('hit') && squareReb[gridPosition + width].classList.contains('miss') || squareReb[gridPosition + width].classList.contains('hit') && squareReb[gridPosition + width + 1].classList.contains('miss') || squareReb[gridPosition + width + 1].classList.contains('hit')) {
+          return computerImperialShot()
+        } else {
+          squareReb[nextShot].classList.replace('ship', 'hit')
+          scroller.innerText = 'The computer hit, it will go again'
+          youParts--
+          youRem.innerText = youParts
+          if (youParts === 0) {
+            return playerRebLoss()
+          } else {
+            setTimeout(computerImpHit, 2000)
+          }
+          // console.log('Computer hits, it goes again!')
+
+        }
+      }
+    }
   }
+
   function redeploy() {
     cells.forEach(item => {
       item.classList.replace('ship', 'square')
@@ -529,8 +549,7 @@ function init() {
     squareImp[gridPosition + (width * 2) + 2].classList.replace('square', 'ship')
     tieSelect.style.display = 'none'
     impRandom.style.display = 'none'
-
-    console.log('squareImp', squareImp)
+    // console.log('squareImp', squareImp)
     impDeployed.push(1)
     if (impDeployed.length === 5) {
       impBegin.style.display = 'flex'

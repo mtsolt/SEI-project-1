@@ -15,12 +15,21 @@
 
 #rebelSide .grid{
   background-image: url("../Images/Rebel.png");
+  border-radius: 10px;
+  border: solid red 5px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 97%;
 
 }
 
 #impSide .grid{
-  background-image: url("../Images/Imperial.png");
-
+  background-image: url("../Images/imperialW.jpeg");
+  border-radius: 10px;
+  border: solid white 5px;
+  background-size: 112%;
+  background-position: center;
+  
 }
 
 body {
@@ -29,7 +38,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  
+  background-image: url("../Images/Background.png");
+  background-size: cover;
 }
 
 content{
@@ -44,6 +54,9 @@ header{
   text-align: center;
   font-family: 'Star Jedi', arial;
   font-size: 50px;
+  background-color: black;
+  border-top-left-radius: 75px;
+  border-top-right-radius: 75px;
 }
 #battleship {
   font-family: arial;
@@ -52,7 +65,8 @@ header{
 main{
   display: flex;
   min-height : 600px;
-  min-width: 1480
+  min-width: 1480;
+  background-color: black;
 
 }
 
@@ -61,10 +75,10 @@ section {
   margin: auto;
 }
 
-#counters {
-  display: none;
-  flex-direction: column;
-
+#start-button{
+  padding: 15px;
+  font-size: larger;
+  margin: 5px;
 }
 
 #center {
@@ -77,11 +91,17 @@ section {
 #impBegin {
   display: none;
   justify-content: center;
+  padding: 10px;
+  font-size: larger;
+  margin: 5px;
 }
 
 #rebBegin {
   display: none;
   justify-content: center;
+  padding: 10px;
+  font-size: larger;
+  margin: 5px;
 }
 
 #scroller {
@@ -91,6 +111,7 @@ section {
   font-family: arial;
   font-size: 25px;
   min-width: 150px;
+  margin-bottom: 10px;
   
 }
 
@@ -118,14 +139,19 @@ section {
   max-width: 100%;
   max-height: 100%;
   background-size: cover;
+  
 }
 
 .grid div {
-  border: 1px solid lightgrey;
+  border: solid rgb(149, 184, 23) 1px;
   flex-grow: 1;
   height: 7.1428%;
   width: 7.1428%;
   text-align: center;
+}
+
+.square{
+  background-color: 'none';
 }
 
 .buttonsBox {
@@ -164,47 +190,100 @@ section {
   opacity: 0.5;
 }
 
-#tieSelect1 {
-  background-image: url('../Images/tieFighter.png');
+#tieSelect{
+  background-image: url('../Images/Tie\ Fighter.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: white;
 
 }
-#tieSelect2{
-  background-image: url('../Images/tieFighter.png');
+#tieHeavy{
+  background-image: url('../Images/TieHeavy.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: white;
 }
-#tieInterceptor {
-  background-image: ;
+#tieInterceptor{
+  background-image: url('../Images/TieInterceptor.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: white;
 }
-#tieBomber {
-  background-image: ;
+#tieBomber{
+  background-image: url('../Images/Tie\ Bomber.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: white;
 }
-#cruiserSelect {
-  background-image: url('../Images/Cruiser.png');
+#cruiserSelect{
+  background-image: url('../Images/Cruiser.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: white;
 }
 
-#xSelect1 {
-  background-image: ;
+#xSelect{
+  background-image: url('../Images/XWing.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: white;
 }
-#xSelect2 {
-  background-image: ;
+#bSelect{
+  background-image: url('../Images/B\ Wing.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: white;
 }
-#aSelect3 {
-  background-image: ;
+#aSelect{
+  background-image: url('../Images/A\ Wing.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: white;
 }
-#ySelect4 {
-  background-image: ;
+#ySelect{
+  background-image: url('../Images/YWing.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: white;
 }
-#falconSelect {
-  background-image: url('../Images/falcon.png');
+#falconSelect{
+  background-image: url('../Images/Falcon.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: white;
 }
 
 
 button {
-  padding: 10px;
+  padding: 30px;
   margin: 5px;
+  font-size: inherit;
 }
 
 footer{
   text-align: center;
   flex: 1;
-  padding: 15px;
+  min-height: 90px;
+  background-color: black;
+  border-bottom-left-radius: 75px;
+  border-bottom-right-radius: 75px;
+}
+
+#counters {
+  display: none;
+}
+
+#counters p{
+  flex: 1;
+  font-size: x-large;
 }
