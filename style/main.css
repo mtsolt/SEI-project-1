@@ -27,6 +27,8 @@ body {
   background-color: black;
   color:yellow;
   display: flex;
+  align-items: center;
+  justify-content: center;
   
 }
 
@@ -137,6 +139,18 @@ section {
   color: white;
 }
 
+.shipArq {
+  background-image: url('../Images/Cruiser.png');
+  background-attachment: fixed, scroll;
+  background-repeat: no-repeat, repeat-y;
+}
+
+.tieship {
+  background-image: url('../Images/tieFighter.png');
+  background-attachment: fixed, scroll;
+  background-repeat: no-repeat, repeat-y;
+}
+
 .hit{
   background-image: url('../Images/rachel-kong-ballfire.gif');
   background-size: contain;
@@ -148,6 +162,39 @@ section {
   background-image: url('../Images/miss.png');
   background-size: contain;
   opacity: 0.5;
+}
+
+#tieSelect1 {
+  background-image: url('../Images/tieFighter.png');
+
+}
+#tieSelect2{
+  background-image: url('../Images/tieFighter.png');
+}
+#tieInterceptor {
+  background-image: ;
+}
+#tieBomber {
+  background-image: ;
+}
+#cruiserSelect {
+  background-image: url('../Images/Cruiser.png');
+}
+
+#xSelect1 {
+  background-image: ;
+}
+#xSelect2 {
+  background-image: ;
+}
+#aSelect3 {
+  background-image: ;
+}
+#ySelect4 {
+  background-image: ;
+}
+#falconSelect {
+  background-image: url('../Images/falcon.png');
 }
 
 
