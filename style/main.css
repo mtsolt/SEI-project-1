@@ -352,6 +352,7 @@ footer{
   background: black;
   visibility: hidden;
   left: 300px;
+  bottom: 110px;
   opacity: 0;
   display: none;
   flex-direction: column;
