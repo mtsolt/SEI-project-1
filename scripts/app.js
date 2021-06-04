@@ -443,10 +443,10 @@ function init() {
   function chooseRebel() {
     gridReb.removeChild(chooseRebButton)
     gridImp.removeChild(chooseImpButton)
-    gridReb.style.backgroundImage = 'url("/Users/mtsolt/development/SEI-project-1/Images/Left.png")'
+    gridReb.style.backgroundImage = 'url("/Users/mtsolt/development/SEI-project-1/Images/left.png")'
     gridReb.style.border = 'solid #2d6826 5px'
     gridReb.style.backgroundSize = '100%'
-    gridImp.style.backgroundImage = 'url("/Users/mtsolt/development/SEI-project-1/Images/Right.png")'
+    gridImp.style.backgroundImage = 'url("/Users/mtsolt/development/SEI-project-1/Images/right.png")'
     gridImp.style.border = 'solid #2d6826 5px'
     setTimeout(createGrids(), 2000)
     setTimeout(placeCruiser(), 10)
