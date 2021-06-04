@@ -271,10 +271,10 @@ function init() {
     gridReb.removeChild(chooseRebButton)
     // gridReb.style.backgroundImage = 'url("../Images/Left.png")' <-- neither of these load the image
     // gridReb.style.backgroundImage = 'url("..SEI-project-1/Images/Left.png")' <-- neither of these load the image
-    gridReb.style.backgroundImage = 'url("../Images/Left.png")'
+    gridReb.style.backgroundImage = 'url("./Images/LeftBackground.png")'
     gridReb.style.border = 'solid #2d6826 5px'
     gridReb.style.backgroundSize = '100%'
-    gridImp.style.backgroundImage = 'url("../Images/Right.png")'
+    gridImp.style.backgroundImage = 'url("./Images/RightBackground.png")'
     gridImp.style.border = 'solid #2d6826 5px'
     setTimeout(createGrids(), 2000)
     setTimeout(placeFalcon(), 10)
@@ -443,10 +443,10 @@ function init() {
   function chooseRebel() {
     gridReb.removeChild(chooseRebButton)
     gridImp.removeChild(chooseImpButton)
-    gridReb.style.backgroundImage = 'url("/Users/mtsolt/development/SEI-project-1/Images/left.png")'
+    gridReb.style.backgroundImage = 'url("./Images/LeftBackground.png")'
     gridReb.style.border = 'solid #2d6826 5px'
     gridReb.style.backgroundSize = '100%'
-    gridImp.style.backgroundImage = 'url("/Users/mtsolt/development/SEI-project-1/Images/right.png")'
+    gridImp.style.backgroundImage = 'url("./Images/RightBackground.png")'
     gridImp.style.border = 'solid #2d6826 5px'
     setTimeout(createGrids(), 2000)
     setTimeout(placeCruiser(), 10)
