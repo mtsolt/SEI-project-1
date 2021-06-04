@@ -79,7 +79,7 @@ function init() {
   shapes.style.margin = '5px'
 
   const newMusic = document.createElement('button')
-  newMusic.innerText = 'Ship Shapes on Grid'
+  newMusic.innerText = 'Change Music'
   newMusic.style.display = 'flex'
   newMusic.style.justifyContent = 'center'
   newMusic.style.padding = '10px'
