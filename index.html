@@ -14,8 +14,11 @@
 
 <body>
   <content>
-    <header>STAR WARS<br><span id='battleship'>BATTLESHIPS</span></header>
+    <header>
+      <div class='header'>STAR WARS<br><span id='battleship'>BATTLESHIPS</span></div>
+    </header>
     <main>
+      <audio id='audio'></audio>
       <section id='rebelSide'>
         <div class='grid-wrapper'>
           <div class='grid'></div>
@@ -24,8 +27,8 @@
       <section id='center'>
         <div id='scroller'> The REBEL ALLIANCE are making a daring attack on the IMPERIAL fleet, do you have what it
           takes to survive? </div>
-          <button id ='rebBegin'>Begin Battle</button>
-          <button id ='impBegin'>Begin Battle</button>
+        <button id='rebBegin'>Begin Battle</button>
+        <button id='impBegin'>Begin Battle</button>
         <div id='start-game'>
           <button id='start-button'>Start Game</button>
         </div>
@@ -35,22 +38,43 @@
           <div class='grid'></div>
         </div>
       </section>
+      <section class='overlay'>
+        <div id='shipShapes'>
+          <div id='rebelShapes'>
+            <div class='shapes' id ='shapeHeader'>REBEL SHIPS</div>
+            <div class='shapes'><img src='../SEI-project-1/Images/AWingShape.png'> A Wing</div>
+            <div class='shapes'><img src='../SEI-project-1/Images/BWingShape.png'> B Wing</div>
+            <div class='shapes'><img src='../SEI-project-1/Images/XWingShape.png'> X Wing</div>
+            <div class='shapes'><img src='../SEI-project-1/Images/YWingShape.png'> Y Wing</div>
+            <div class='shapes'><img src='../SEI-project-1/Images/FalconShape.png'> Falcon</div>
+          </div>
+          <div id='imperialShapes'>
+            <div class='shapes' id ='shapeHeader'>IMPERIAL SHIPS</div>
+            <div class='shapes'><img src='../SEI-project-1/Images/TieFighterShape.png'> Tie Fighter </div>
+            <div class='shapes'><img src='../SEI-project-1/Images/TieHeavyShape.png'> Tie Heavy</div>
+            <div class='shapes'><img src='../SEI-project-1/Images/TieBomberShape.png'> Tie Bomber</div>
+            <div class='shapes'><img src='../SEI-project-1/Images/TieInterceptorShape.png'>Tie Interceptor</div>
+            <div class='shapes'><img src='../SEI-project-1/Images/CruiserShape.png'> Cruiser</div>
+          </div>
+        </div>
+        <button id='close'>Close Shapes</button>
+      </section>
     </main>
     <footer>
       <section>
         <div class='buttonsBox' id='imperial'>
-          <span class= 'impButtonsBox' id='impDeploy'>Deploy your: </span>
-          <button class= 'impButtonsBox' id='tieSelect'>Tie Fighter 1</button>
-          <button class= 'impButtonsBox' id='tieHeavy'>Tie Heavy 2</button>
-          <button class= 'impButtonsBox' id='tieInterceptor'>Tie Interceptor 3</button>
-          <button class= 'impButtonsBox' id='tieBomber'>Tie Bomber 4</button>
-          <button class= 'impButtonsBox' id='cruiserSelect'>Cruiser 5</button>
+          <span class='impButtonsBox' id='impDeploy'>Deploy your: </span>
+          <button class='impButtonsBox' id='tieSelect'>Tie Fighter 1</button>
+          <button class='impButtonsBox' id='tieHeavy'>Tie Heavy 2</button>
+          <button class='impButtonsBox' id='tieInterceptor'>Tie Interceptor 3</button>
+          <button class='impButtonsBox' id='tieBomber'>Tie Bomber 4</button>
+          <button class='impButtonsBox' id='cruiserSelect'>Cruiser 5</button>
           <button class='impButtonsBox' id='impRandom'>Randomise</button>
           <button class='impButtonsBox' id='impRedeploy'>Redeploy?</button>
       </section>
       <section>
         <div class='buttonsBox' id='rebel'>
-          <span class= 'rebButtonsBox' id='rebDeploy'>Deploy your: </span>
+          <span class='rebButtonsBox' id='rebDeploy'>Deploy your: </span>
           <button class='rebButtonsBox' id='xSelect'>X-Wing 1</button>
           <button class='rebButtonsBox' id='bSelect'>B-Wing 2</button>
           <button class='rebButtonsBox' id='aSelect'>A-Wing 3</button>
@@ -63,7 +87,7 @@
           <p id='yourParts'>Your Ship parts remaining: <span id='youRem'>0</span></p>
           <p id='shots'>Shots Taken: <span id='shotsTaken'>0</span></p>
           <p id='shipParts'>Enemy Ships parts remaining: <span id='enRem'>0</span></p>
-          </div>
+        </div>
       </section>
     </footer>
   </content>

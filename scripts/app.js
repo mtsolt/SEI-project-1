@@ -27,29 +27,23 @@ function init() {
   const scroller = document.querySelector('#scroller')
   // selects the scroller
   const counters = document.querySelector('#counters')
-
   // const gridLeft = document.querySelector('#rebelSide .grid') <---Doesn't exist yet
-
   // const gridRight = document.querySelector('#impSide .grid') <---Doesn't exist yet
-
   const main = document.querySelector('main')
   // console.log('main', main)
-
-
   const rebelButtonsBox = document.querySelector('#rebel')
   // console.log(rebelButtonsBox, 'rebelButtonsBox')
-
   const imperialButtonsBox = document.querySelector('#imperial')
   // console.log(imperialButtonsBox, 'imperialButtonsBox')
-
   const shipButtons = document.querySelectorAll('.rebButtonsBox, .impButtonsBox')
   // each button in the buttons box
-
   // Ending 
   const finish = document.querySelectorAll('#rebelSide, #center, #impSide')
+
+  const overlay = document.querySelector('.overlay')
+
+  const close = document.querySelector('#close')
   // console.log('finish', finish)
-
-
   // Rebel start button
   const chooseRebButton = document.createElement('button')
   chooseRebButton.innerText = 'REBEL ALLIANCE'
@@ -66,12 +60,7 @@ function init() {
   chooseImpButton.style.background = 'none'
   chooseImpButton.style.border = 'none'
   chooseImpButton.style.fontSize = 'larger'
-
-
   //redploy button
-
-
-
   // restart page
   const restartButton = document.createElement('button')
   restartButton.innerText = 'Restart Game'
@@ -80,22 +69,49 @@ function init() {
   restartButton.style.padding = '10px'
   restartButton.style.fontSize = 'larger'
   restartButton.style.margin = '5px'
+  // shapes section
+  const shapes = document.createElement('button')
+  shapes.innerText = 'Ship Shapes on Grid'
+  shapes.style.display = 'flex'
+  shapes.style.justifyContent = 'center'
+  shapes.style.padding = '10px'
+  shapes.style.fontSize = 'larger'
+  shapes.style.margin = '5px'
+
+  
+
+
 
   // game end options
 
   const playerImperialWin = document.createElement('section')
   playerImperialWin.innerText = 'You have crushed these rebels like the dogs they are. Pick up any of their survivors, we have ways of making them talk. Well done.'
+  playerImperialWin.style.fontSize = 'larger'
+  playerImperialWin.style.backgroundImage = 'url("/Users/mtsolt/development/SEI-project-1/Images/EmpWin.jpeg")'
+  playerImperialWin.style.backgroundSize = 'cover'
+  playerImperialWin.style.backgroundRepeat = 'no-repeat'
 
 
   const playerImperialLoss = document.createElement('section')
   playerImperialLoss.innerText = 'You fool, you have lost the day. Better that you die out there than the Emperor hear of your idiocy.'
+  playerImperialLoss.style.fontSize = 'larger'
+  playerImperialLoss.style.backgroundImage = 'url("/Users/mtsolt/development/SEI-project-1/Images/EmpLoss.jpeg")'
+  playerImperialLoss.style.backgroundSize = 'cover'
+  playerImperialLoss.style.backgroundRepeat = 'no-repeat'
 
   const playerRebelWin = document.createElement('section')
   playerRebelWin.innerText = 'You have won! The Imperial fleet will surely suffer as a result of this victory. Well done Commander!'
+  playerRebelWin.style.fontSize = 'larger'
+  playerRebelWin.style.backgroundImage = 'url("/Users/mtsolt/development/SEI-project-1/Images/RebWin.jpeg")'
+  playerRebelWin.style.backgroundSize = 'cover'
+  playerRebelWin.style.backgroundRepeat = 'no-repeat'
 
   const playerRebelLoss = document.createElement('section')
   playerRebelLoss.innerText = "Commander, we can't sustain these losses any longer, pull back what remains of your group. We have lost this day."
-
+  playerRebelLoss.style.fontSize = 'larger'
+  playerRebelLoss.style.backgroundImage = 'url("/Users/mtsolt/development/SEI-project-1/Images/RebLoss.jpeg")'
+  playerRebelLoss.style.backgroundSize = 'cover'
+  playerRebelLoss.style.backgroundRepeat = 'no-repeat'
 
   // Button selects.
   const tieSelect = document.querySelector('#tieSelect')
@@ -127,10 +143,16 @@ function init() {
   const youRem = document.querySelector('#youRem')
   // console.log('youRem', youRem)
 
-
-
-
   // const imperialShot = document.querySelector('.computerShoot')
+  const audio = document.querySelector('audio')
+  const sounds = [1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+  let randomSound = Math.floor(Math.random() * sounds.length)
+  
+  function playSound(randomSound) {
+    audio.src = `./Sounds/${randomSound}.wav`
+    audio.play()
+  }
+
 
 
   const width = 14
@@ -235,6 +257,7 @@ function init() {
     rebelSide.style.padding = '0'
     scroller.innerText = ''
     impBegin.style.display = 'none'
+    centerColumn.appendChild(shapes)
     return playerImperial()
   }
 
@@ -264,11 +287,15 @@ function init() {
           shots.innerText = shotsTaken
           shoot = 0
           setTimeout(computerRebelShot, 2000)
+          randomSound = Math.floor(Math.random() * sounds.length)
+          playSound(randomSound)
         } else if (event.target.classList.contains('hit') || event.target.classList.contains('miss')) {
           scroller.innerText = "You've already fired there, try again!"
         } else {
           scroller.innerText = 'You hit! You can go again'
           event.target.classList.replace('enemyShip', 'hit')
+          randomSound = Math.floor(Math.random() * sounds.length)
+          playSound(randomSound)
           shotsTaken++
           shots.innerText = shotsTaken
           enemyParts--
@@ -289,6 +316,8 @@ function init() {
         gridPosition = Math.floor(Math.random() * squareImp.length)
         if (squareImp[gridPosition].classList.contains('square')) {
           squareImp[gridPosition].classList.replace('square', 'miss')
+          randomSound = Math.floor(Math.random() * sounds.length)
+          playSound(randomSound)
           scroller.innerText = ("The Rebel fleet missed, it is your go!")
           // console.log('computer miss')
           shoot = 1
@@ -297,6 +326,8 @@ function init() {
           i--
         } else {
           scroller.innerText = 'The computer hit! It will go again'
+          randomSound = Math.floor(Math.random() * sounds.length)
+          playSound(randomSound)
           squareImp[gridPosition].classList.replace('ship', 'hit')
           youParts--
           youRem.innerText = youParts
@@ -311,6 +342,7 @@ function init() {
         for (let i = 0; i < 1; i++) {
           const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
           const hitBox = []
+          let a = 0
           hitBox.push(gridPosition - 1, gridPosition + 1, gridPosition - width - 1, gridPosition - width, gridPosition - width + 1, gridPosition + width - 1, gridPosition + width, gridPosition + width + 1)
           // console.log(hitBox, 'hitBox')
           shotPosition = Math.floor(Math.random() * hitBox.length)
@@ -318,16 +350,25 @@ function init() {
           // console.log('nextshot', nextShot)
           if (squareImp[nextShot].classList.contains('square')) {
             squareImp[nextShot].classList.replace('square', 'miss')
+            randomSound = Math.floor(Math.random() * sounds.length)
+          playSound(randomSound)
             scroller.innerText = ("The Rebel fleet missed, it is your go!")
             // console.log('computer miss')
             shoot = 1
+            a = 0
             return playerImperialShot()
           } else if (squareImp[nextShot].classList.contains('miss') || squareImp[nextShot].classList.contains('hit')) {
             i--
-          } else if (squareImp[gridPosition - 1].classList.contains('miss') || squareImp[gridPosition - 1].classList.contains('hit') && squareImp[gridPosition + 1].classList.contains('miss') || squareImp[gridPosition + 1].classList.contains('hit') && squareImp[gridPosition - width - 1].classList.contains('miss') || squareImp[gridPosition - width - 1].classList.contains('hit') && squareImp[gridPosition - width].classList.contains('miss') || squareImp[gridPosition - width].classList.contains('hit') && squareImp[gridPosition - width + 1].classList.contains('miss') || squareImp[gridPosition - width + 1].classList.contains('hit') && squareImp[gridPosition + width - 1].classList.contains('miss') || squareImp[gridPosition + width - 1].classList.contains('hit') && squareImp[gridPosition + width].classList.contains('miss') || squareImp[gridPosition + width].classList.contains('hit') && squareImp[gridPosition + width + 1].classList.contains('miss') || squareImp[gridPosition + width + 1].classList.contains('hit')) {
-            return computerRebelShot()
+            a++
+            if (a >= 6) {
+              return computerRebelShot
+            }
+            // } else if (squareImp[gridPosition - 1].classList.contains('miss') || squareImp[gridPosition - 1].classList.contains('hit') && squareImp[gridPosition + 1].classList.contains('miss') || squareImp[gridPosition + 1].classList.contains('hit') && squareImp[gridPosition - width - 1].classList.contains('miss') || squareImp[gridPosition - width - 1].classList.contains('hit') && squareImp[gridPosition - width].classList.contains('miss') || squareImp[gridPosition - width].classList.contains('hit') && squareImp[gridPosition - width + 1].classList.contains('miss') || squareImp[gridPosition - width + 1].classList.contains('hit') && squareImp[gridPosition + width - 1].classList.contains('miss') || squareImp[gridPosition + width - 1].classList.contains('hit') && squareImp[gridPosition + width].classList.contains('miss') || squareImp[gridPosition + width].classList.contains('hit') && squareImp[gridPosition + width + 1].classList.contains('miss') || squareImp[gridPosition + width + 1].classList.contains('hit')) {
+            //   return computerRebelShot()
           } else {
             scroller.innerText = 'The computer hit! It will go again'
+            randomSound = Math.floor(Math.random() * sounds.length)
+          playSound(randomSound)
             squareImp[nextShot].classList.replace('ship', 'hit')
             youParts--
             youRem.innerText = youParts
@@ -384,7 +425,8 @@ function init() {
     impSide.style.padding = '0'
     scroller.innerText = ''
     rebBegin.style.display = 'none'
-    playerRebel()
+    centerColumn.appendChild(shapes)
+    return playerRebel()
   }
 
   function playerRebel() {
@@ -408,6 +450,8 @@ function init() {
       if (shoot !== 0) {
         if (event.target.classList.contains('square')) {
           event.target.classList.replace('square', 'miss')
+          randomSound = Math.floor(Math.random() * sounds.length)
+          playSound(randomSound)
           scroller.innerText = "You missed! It's the computer's go"
           shotsTaken++
           shots.innerText = shotsTaken
@@ -418,6 +462,8 @@ function init() {
           scroller.innerText = "You've already fired there, try again!"
         } else {
           event.target.classList.replace('enemyShip', 'hit')
+          randomSound = Math.floor(Math.random() * sounds.length)
+          playSound(randomSound)
           scroller.innerText = 'You hit! You can go again'
           shotsTaken++
           shots.innerText = shotsTaken
@@ -446,6 +492,8 @@ function init() {
         const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid div')
         gridPosition = Math.floor(Math.random() * squareReb.length)
         if (squareReb[gridPosition].classList.contains('square')) {
+          randomSound = Math.floor(Math.random() * sounds.length)
+          playSound(randomSound)
           squareReb[gridPosition].classList.replace('square', 'miss')
           // console.log('computer miss')
           scroller.innerText = ("The Imperial fleet missed, it is your go!")
@@ -455,6 +503,8 @@ function init() {
           i--
         } else {
           squareReb[gridPosition].classList.replace('ship', 'hit')
+          randomSound = Math.floor(Math.random() * sounds.length)
+          playSound(randomSound)
           scroller.innerText = 'The computer hit, it will go again'
           youParts--
           youRem.innerText = youParts
@@ -466,26 +516,37 @@ function init() {
         }
       }
     }
-    function computerImpHit(gridPosition) {
+    
+    function computerImpHit() {
       for (let i = 0; i < 1; i++) {
         const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid div')
         const hitBox = []
+        let a = 0
         hitBox.push(gridPosition - 1, gridPosition + 1, gridPosition - width - 1, gridPosition - width, gridPosition - width + 1, gridPosition + width - 1, gridPosition + width, gridPosition + width + 1)
         shotPosition = Math.floor(Math.random() * hitBox.length)
         nextShot = hitBox.slice(shotPosition, shotPosition + 1)
         // console.log('nextshot', nextShot)
         if (squareReb[nextShot].classList.contains('square')) {
           squareReb[nextShot].classList.replace('square', 'miss')
+          randomSound = Math.floor(Math.random() * sounds.length)
+          playSound(randomSound)
           // console.log('computer miss')
           scroller.innerText = ("The Imperial fleet missed, it is your go!")
           shoot = 1
+          a = 0
           return playerRebelShot()
         } else if (squareReb[nextShot].classList.contains('miss') || squareReb[nextShot].classList.contains('hit')) {
           i--
-        } else if (squareReb[gridPosition - 1].classList.contains('miss') || squareReb[gridPosition - 1].classList.contains('hit') && squareReb[gridPosition + 1].classList.contains('miss') || squareReb[gridPosition + 1].classList.contains('hit') && squareReb[gridPosition - width - 1].classList.contains('miss') || squareReb[gridPosition - width - 1].classList.contains('hit') && squareReb[gridPosition - width].classList.contains('miss') || squareReb[gridPosition - width].classList.contains('hit') && squareReb[gridPosition - width + 1].classList.contains('miss') || squareReb[gridPosition - width + 1].classList.contains('hit') && squareReb[gridPosition + width - 1].classList.contains('miss') || squareReb[gridPosition + width - 1].classList.contains('hit') && squareReb[gridPosition + width].classList.contains('miss') || squareReb[gridPosition + width].classList.contains('hit') && squareReb[gridPosition + width + 1].classList.contains('miss') || squareReb[gridPosition + width + 1].classList.contains('hit')) {
-          return computerImperialShot()
+          a++
+          if (a >= 6) {
+            return computerImperialShot
+          }
+          // } else if (squareReb[gridPosition - 1].classList.contains('miss') || squareReb[gridPosition - 1].classList.contains('hit') && squareReb[gridPosition + 1].classList.contains('miss') || squareReb[gridPosition + 1].classList.contains('hit') && squareReb[gridPosition - width - 1].classList.contains('miss') || squareReb[gridPosition - width - 1].classList.contains('hit') && squareReb[gridPosition - width].classList.contains('miss') || squareReb[gridPosition - width].classList.contains('hit') && squareReb[gridPosition - width + 1].classList.contains('miss') || squareReb[gridPosition - width + 1].classList.contains('hit') && squareReb[gridPosition + width - 1].classList.contains('miss') || squareReb[gridPosition + width - 1].classList.contains('hit') && squareReb[gridPosition + width].classList.contains('miss') || squareReb[gridPosition + width].classList.contains('hit') && squareReb[gridPosition + width + 1].classList.contains('miss') || squareReb[gridPosition + width + 1].classList.contains('hit')) {
+          //   return computerImperialShot()
         } else {
           squareReb[nextShot].classList.replace('ship', 'hit')
+          randomSound = Math.floor(Math.random() * sounds.length)
+          playSound(randomSound)
           scroller.innerText = 'The computer hit, it will go again'
           youParts--
           youRem.innerText = youParts
@@ -540,13 +601,13 @@ function init() {
   function placeTieFighter1(gridPosition) {
     const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
     gridPosition = 0
-    squareImp[gridPosition].classList.replace('square', 'shipTieFighter')
-    squareImp[gridPosition + 1].classList.replace('square', 'shipTieFighter')
-    squareImp[gridPosition + 2].classList.replace('square', 'shipTieFighter')
-    squareImp[gridPosition + (width + 1)].classList.replace('square', 'shipTieFighter')
-    squareImp[gridPosition + (width * 2)].classList.replace('square', 'shipTieFighter')
-    squareImp[gridPosition + (width * 2) + 1].classList.replace('square', 'shipTieFighter')
-    squareImp[gridPosition + (width * 2) + 2].classList.replace('square', 'shipTieFighter')
+    squareImp[gridPosition].classList.replace('square', 'ship')
+    squareImp[gridPosition + 1].classList.replace('square', 'ship')
+    squareImp[gridPosition + 2].classList.replace('square', 'ship')
+    squareImp[gridPosition + (width + 1)].classList.replace('square', 'ship')
+    squareImp[gridPosition + (width * 2)].classList.replace('square', 'ship')
+    squareImp[gridPosition + (width * 2) + 1].classList.replace('square', 'ship')
+    squareImp[gridPosition + (width * 2) + 2].classList.replace('square', 'ship')
     tieSelect.style.display = 'none'
     impRandom.style.display = 'none'
     // console.log('squareImp', squareImp)
@@ -559,14 +620,14 @@ function init() {
   function placeTieHeavy2(gridPosition) {
     const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
     gridPosition = width - 3
-    squareImp[gridPosition].classList.replace('square', 'shipTieHeavy')
-    squareImp[gridPosition + 1].classList.replace('square', 'shipTieHeavy')
-    squareImp[gridPosition + 2].classList.replace('square', 'shipTieHeavy')
-    squareImp[gridPosition + (width + 1)].classList.replace('square', 'shipTieHeavy')
-    squareImp[gridPosition + (width * 2) + 1].classList.replace('square', 'shipTieHeavy')
-    squareImp[gridPosition + (width * 3)].classList.replace('square', 'shipTieHeavy')
-    squareImp[gridPosition + (width * 3) + 1].classList.replace('square', 'shipTieHeavy')
-    squareImp[gridPosition + (width * 3) + 2].classList.replace('square', 'shipTieHeavy')
+    squareImp[gridPosition].classList.replace('square', 'ship')
+    squareImp[gridPosition + 1].classList.replace('square', 'ship')
+    squareImp[gridPosition + 2].classList.replace('square', 'ship')
+    squareImp[gridPosition + (width + 1)].classList.replace('square', 'ship')
+    squareImp[gridPosition + (width * 2) + 1].classList.replace('square', 'ship')
+    squareImp[gridPosition + (width * 3)].classList.replace('square', 'ship')
+    squareImp[gridPosition + (width * 3) + 1].classList.replace('square', 'ship')
+    squareImp[gridPosition + (width * 3) + 2].classList.replace('square', 'ship')
     tieHeavy.style.display = 'none'
     impRandom.style.display = 'none'
     impDeployed.push(1)
@@ -577,11 +638,11 @@ function init() {
   function placeTieInterceptor3(gridPosition) {
     const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
     gridPosition = ((width * width) - (width * 3))
-    squareImp[gridPosition].classList.replace('square', 'shipTieInterceptor')
-    squareImp[gridPosition + 1].classList.replace('square', 'shipTieInterceptor')
-    squareImp[gridPosition + width + 1].classList.replace('square', 'shipTieInterceptor')
-    squareImp[gridPosition + (2 * width)].classList.replace('square', 'shipTieInterceptor')
-    squareImp[gridPosition + (2 * width) + 1].classList.replace('square', 'shipTieInterceptor')
+    squareImp[gridPosition].classList.replace('square', 'ship')
+    squareImp[gridPosition + 1].classList.replace('square', 'ship')
+    squareImp[gridPosition + width + 1].classList.replace('square', 'ship')
+    squareImp[gridPosition + (2 * width)].classList.replace('square', 'ship')
+    squareImp[gridPosition + (2 * width) + 1].classList.replace('square', 'ship')
     tieInterceptor.style.display = 'none'
     impRandom.style.display = 'none'
     impDeployed.push(1)
@@ -592,14 +653,14 @@ function init() {
   function placeTieBomber4(gridPosition) {
     const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
     gridPosition = ((width * width) - (width * 2) - 3)
-    squareImp[gridPosition].classList.replace('square', 'shipTieBomber')
-    squareImp[gridPosition + 1].classList.replace('square', 'shipTieBomber')
-    squareImp[gridPosition + 2].classList.replace('square', 'shipTieBomber')
-    squareImp[gridPosition + (width)].classList.replace('square', 'shipTieBomber')
-    squareImp[gridPosition + (width + 1)].classList.replace('square', 'shipTieBomber')
-    squareImp[gridPosition + (width * 2)].classList.replace('square', 'shipTieBomber')
-    squareImp[gridPosition + (width * 2) + 1].classList.replace('square', 'shipTieBomber')
-    squareImp[gridPosition + (width * 2) + 2].classList.replace('square', 'shipTieBomber')
+    squareImp[gridPosition].classList.replace('square', 'ship')
+    squareImp[gridPosition + 1].classList.replace('square', 'ship')
+    squareImp[gridPosition + 2].classList.replace('square', 'ship')
+    squareImp[gridPosition + (width)].classList.replace('square', 'ship')
+    squareImp[gridPosition + (width + 1)].classList.replace('square', 'ship')
+    squareImp[gridPosition + (width * 2)].classList.replace('square', 'ship')
+    squareImp[gridPosition + (width * 2) + 1].classList.replace('square', 'ship')
+    squareImp[gridPosition + (width * 2) + 2].classList.replace('square', 'ship')
     tieBomber.style.display = 'none'
     impRandom.style.display = 'none'
     impDeployed.push(1)
@@ -610,24 +671,24 @@ function init() {
   function placeCruiser1() {
     const squareImp = document.querySelectorAll('#impSide .grid-wrapper .grid div')
     gridPosition = (width * 6) + 4
-    squareImp[gridPosition - width + 2].classList.replace('square', 'shipCruiser')
-    squareImp[gridPosition - width + 3].classList.replace('square', 'shipCruiser')
-    squareImp[gridPosition - width + 5].classList.replace('square', 'shipCruiser')
-    squareImp[gridPosition].classList.replace('square', 'shipCruiser')
-    squareImp[gridPosition + 1].classList.replace('square', 'shipCruiser')
-    squareImp[gridPosition + 2].classList.replace('square', 'shipCruiser')
-    squareImp[gridPosition + 3].classList.replace('square', 'shipCruiser')
-    squareImp[gridPosition + 4].classList.replace('square', 'shipCruiser')
-    squareImp[gridPosition + 5].classList.replace('square', 'shipCruiser')
-    squareImp[gridPosition + width].classList.replace('square', 'shipCruiser')
-    squareImp[gridPosition + width + 1].classList.replace('square', 'shipCruiser')
-    squareImp[gridPosition + width + 2].classList.replace('square', 'shipCruiser')
-    squareImp[gridPosition + width + 3].classList.replace('square', 'shipCruiser')
-    squareImp[gridPosition + width + 4].classList.replace('square', 'shipCruiser')
-    squareImp[gridPosition + width + 5].classList.replace('square', 'shipCruiser')
-    squareImp[gridPosition + (width * 2) + 2].classList.replace('square', 'shipCruiser')
-    squareImp[gridPosition + (width * 2) + 3].classList.replace('square', 'shipCruiser')
-    squareImp[gridPosition + (width * 2) + 5].classList.replace('square', 'shipCruiser')
+    squareImp[gridPosition - width + 2].classList.replace('square', 'ship')
+    squareImp[gridPosition - width + 3].classList.replace('square', 'ship')
+    squareImp[gridPosition - width + 5].classList.replace('square', 'ship')
+    squareImp[gridPosition].classList.replace('square', 'ship')
+    squareImp[gridPosition + 1].classList.replace('square', 'ship')
+    squareImp[gridPosition + 2].classList.replace('square', 'ship')
+    squareImp[gridPosition + 3].classList.replace('square', 'ship')
+    squareImp[gridPosition + 4].classList.replace('square', 'ship')
+    squareImp[gridPosition + 5].classList.replace('square', 'ship')
+    squareImp[gridPosition + width].classList.replace('square', 'ship')
+    squareImp[gridPosition + width + 1].classList.replace('square', 'ship')
+    squareImp[gridPosition + width + 2].classList.replace('square', 'ship')
+    squareImp[gridPosition + width + 3].classList.replace('square', 'ship')
+    squareImp[gridPosition + width + 4].classList.replace('square', 'ship')
+    squareImp[gridPosition + width + 5].classList.replace('square', 'ship')
+    squareImp[gridPosition + (width * 2) + 2].classList.replace('square', 'ship')
+    squareImp[gridPosition + (width * 2) + 3].classList.replace('square', 'ship')
+    squareImp[gridPosition + (width * 2) + 5].classList.replace('square', 'ship')
     cruiserSelect.style.display = 'none'
     impRandom.style.display = 'none'
     impDeployed.push(1)
@@ -650,13 +711,13 @@ function init() {
       if (gridPosition % width === width - 2 || gridPosition % width === width - 1 || gridPosition >= ((width * width) - (width * 2) - 3) || squareImp[gridPosition].classList.contains('ship') || squareImp[gridPosition + 1].classList.contains('ship') || squareImp[gridPosition + 2].classList.contains('ship') || squareImp[gridPosition + width + 1].classList.contains('ship') || squareImp[gridPosition + (width * 2)].classList.contains('ship') || squareImp[gridPosition + (width * 2) + 1].classList.contains('ship') || squareImp[gridPosition + (width * 2) + 2].classList.contains('ship')) {
         i--
       } else { // this is the code for the template of the tie fighter - must be a way to have this in single variable, which can then be used to rotate, and display image when whole ship gone. 
-        squareImp[gridPosition].classList.replace('square', 'shipTieFighter')
-        squareImp[gridPosition + 1].classList.replace('square', 'shipTieFighter')
-        squareImp[gridPosition + 2].classList.replace('square', 'shipTieFighter')
-        squareImp[gridPosition + (width + 1)].classList.replace('square', 'shipTieFighter')
-        squareImp[gridPosition + (width * 2)].classList.replace('square', 'shipTieFighter')
-        squareImp[gridPosition + (width * 2) + 1].classList.replace('square', 'shipTieFighter')
-        squareImp[gridPosition + (width * 2) + 2].classList.replace('square', 'shipTieFighter')
+        squareImp[gridPosition].classList.replace('square', 'ship')
+        squareImp[gridPosition + 1].classList.replace('square', 'ship')
+        squareImp[gridPosition + 2].classList.replace('square', 'ship')
+        squareImp[gridPosition + (width + 1)].classList.replace('square', 'ship')
+        squareImp[gridPosition + (width * 2)].classList.replace('square', 'ship')
+        squareImp[gridPosition + (width * 2) + 1].classList.replace('square', 'ship')
+        squareImp[gridPosition + (width * 2) + 2].classList.replace('square', 'ship')
         impDeployed.push(1)
       }
     }
@@ -668,14 +729,14 @@ function init() {
       if (gridPosition % width === width - 2 || gridPosition % width === width - 1 || gridPosition >= ((width * width) - (width * 4) - 3) || squareImp[gridPosition].classList.contains('ship') || squareImp[gridPosition + 1].classList.contains('ship') || squareImp[gridPosition + 2].classList.contains('ship') || squareImp[gridPosition + width + 1].classList.contains('ship') || squareImp[gridPosition + (width * 2) + 1].classList.contains('ship') || squareImp[gridPosition + (width * 3)].classList.contains('ship') || squareImp[gridPosition + (width * 3) + 1].classList.contains('ship') || squareImp[gridPosition + (width * 3) + 2].classList.contains('ship')) {
         i--
       } else { // this is the code for the template of the tie fighter - must be a way to have this in single variable, which can then be used to rotate, and display image when whole ship gone. 
-        squareImp[gridPosition].classList.replace('square', 'shipTieHeavy')
-        squareImp[gridPosition + 1].classList.replace('square', 'shipTieHeavy')
-        squareImp[gridPosition + 2].classList.replace('square', 'shipTieHeavy')
-        squareImp[gridPosition + (width + 1)].classList.replace('square', 'shipTieHeavy')
-        squareImp[gridPosition + (width * 2) + 1].classList.replace('square', 'shipTieHeavy')
-        squareImp[gridPosition + (width * 3)].classList.replace('square', 'shipTieHeavy')
-        squareImp[gridPosition + (width * 3) + 1].classList.replace('square', 'shipTieHeavy')
-        squareImp[gridPosition + (width * 3) + 2].classList.replace('square', 'shipTieHeavy')
+        squareImp[gridPosition].classList.replace('square', 'ship')
+        squareImp[gridPosition + 1].classList.replace('square', 'ship')
+        squareImp[gridPosition + 2].classList.replace('square', 'ship')
+        squareImp[gridPosition + (width + 1)].classList.replace('square', 'ship')
+        squareImp[gridPosition + (width * 2) + 1].classList.replace('square', 'ship')
+        squareImp[gridPosition + (width * 3)].classList.replace('square', 'ship')
+        squareImp[gridPosition + (width * 3) + 1].classList.replace('square', 'ship')
+        squareImp[gridPosition + (width * 3) + 2].classList.replace('square', 'ship')
         impDeployed.push(1)
       }
     }
@@ -687,11 +748,11 @@ function init() {
       if (gridPosition % width === width - 1 || gridPosition >= ((width * width) - (2 * width) - 2) || squareImp[gridPosition].classList.contains('ship') || squareImp[gridPosition + 1].classList.contains('ship') || squareImp[gridPosition + width + 1].classList.contains('ship') || squareImp[gridPosition + (2 * width)].classList.contains('ship') || squareImp[gridPosition + (2 * width) + 1].classList.contains('ship')) {
         i--
       } else { // this is the code for the template of the tie fighter - must be a way to have this in single variable, which can then be used to rotate, and display image when whole ship gone. 
-        squareImp[gridPosition].classList.replace('square', 'shipTieInterceptor')
-        squareImp[gridPosition + 1].classList.replace('square', 'shipTieInterceptor')
-        squareImp[gridPosition + width + 1].classList.replace('square', 'shipTieInterceptor')
-        squareImp[gridPosition + (width * 2)].classList.replace('square', 'shipTieInterceptor')
-        squareImp[gridPosition + (width * 2) + 1].classList.replace('square', 'shipTieInterceptor')
+        squareImp[gridPosition].classList.replace('square', 'ship')
+        squareImp[gridPosition + 1].classList.replace('square', 'ship')
+        squareImp[gridPosition + width + 1].classList.replace('square', 'ship')
+        squareImp[gridPosition + (width * 2)].classList.replace('square', 'ship')
+        squareImp[gridPosition + (width * 2) + 1].classList.replace('square', 'ship')
         impDeployed.push(1)
       }
     }
@@ -704,14 +765,14 @@ function init() {
       if (gridPosition % width === width - 2 || gridPosition % width === width - 1 || gridPosition >= ((width * width) - (width * 2) - 2) || squareImp[gridPosition].classList.contains('ship') || squareImp[gridPosition + 1].classList.contains('ship') || squareImp[gridPosition + 2].classList.contains('ship') || squareImp[gridPosition + width].classList.contains('ship') || squareImp[gridPosition + width + 1].classList.contains('ship') || squareImp[gridPosition + (2 * width)].classList.contains('ship') || squareImp[gridPosition + (width * 2) + 1].classList.contains('ship') || squareImp[gridPosition + (width * 2) + 2].classList.contains('ship')) {
         i--
       } else { // this is the code for the template of the tie fighter - must be a way to have this in single variable, which can then be used to rotate, and display image when whole ship gone. 
-        squareImp[gridPosition].classList.replace('square', 'shipTieBomber')
-        squareImp[gridPosition + 1].classList.replace('square', 'shipTieBomber')
-        squareImp[gridPosition + 2].classList.replace('square', 'shipTieBomber')
-        squareImp[gridPosition + (width)].classList.replace('square', 'shipTieBomber')
-        squareImp[gridPosition + (width + 1)].classList.replace('square', 'shipTieBomber')
-        squareImp[gridPosition + (width * 2)].classList.replace('square', 'shipTieBomber')
-        squareImp[gridPosition + (width * 2) + 1].classList.replace('square', 'shipTieBomber')
-        squareImp[gridPosition + (width * 2) + 2].classList.replace('square', 'shipTieBomber')
+        squareImp[gridPosition].classList.replace('square', 'ship')
+        squareImp[gridPosition + 1].classList.replace('square', 'ship')
+        squareImp[gridPosition + 2].classList.replace('square', 'ship')
+        squareImp[gridPosition + (width)].classList.replace('square', 'ship')
+        squareImp[gridPosition + (width + 1)].classList.replace('square', 'ship')
+        squareImp[gridPosition + (width * 2)].classList.replace('square', 'ship')
+        squareImp[gridPosition + (width * 2) + 1].classList.replace('square', 'ship')
+        squareImp[gridPosition + (width * 2) + 2].classList.replace('square', 'ship')
         impDeployed.push(1)
       }
     }
@@ -725,24 +786,24 @@ function init() {
       if (gridPosition <= width || gridPosition > ((width * width) - (2 * width) - 6) || gridPosition % width === width - 5 || gridPosition % width === width - 4 || gridPosition % width === width - 3 || gridPosition % width === width - 2 || gridPosition % width === width - 1 || squareImp[gridPosition - width + 2].classList.contains('ship') || squareImp[gridPosition - width + 3].classList.contains('ship') || squareImp[gridPosition - width + 5].classList.contains('ship') || squareImp[gridPosition].classList.contains('ship') || squareImp[gridPosition + 1].classList.contains('ship') || squareImp[gridPosition + 2].classList.contains('ship') || squareImp[gridPosition + 3].classList.contains('ship') || squareImp[gridPosition + 4].classList.contains('ship') || squareImp[gridPosition + 5].classList.contains('ship') || squareImp[gridPosition + width].classList.contains('ship') || squareImp[gridPosition + width + 1].classList.contains('ship') || squareImp[gridPosition + width + 2].classList.contains('ship') || squareImp[gridPosition + width + 3].classList.contains('ship') || squareImp[gridPosition + width + 4].classList.contains('ship') || squareImp[gridPosition + width + 5].classList.contains('ship') || squareImp[gridPosition + (width * 2) + 2].classList.contains('ship') || squareImp[gridPosition + (width * 2) + 3].classList.contains('ship') || squareImp[gridPosition + (width * 2) + 5].classList.contains('ship')) {
         i--
       } else {
-        squareImp[gridPosition - width + 2].classList.replace('square', 'shipCruiser')
-        squareImp[gridPosition - width + 3].classList.replace('square', 'shipCruiser')
-        squareImp[gridPosition - width + 5].classList.replace('square', 'shipCruiser')
-        squareImp[gridPosition].classList.replace('square', 'shipCruiser')
-        squareImp[gridPosition + 1].classList.replace('square', 'shipCruiser')
-        squareImp[gridPosition + 2].classList.replace('square', 'shipCruiser')
-        squareImp[gridPosition + 3].classList.replace('square', 'shipCruiser')
-        squareImp[gridPosition + 4].classList.replace('square', 'shipCruiser')
-        squareImp[gridPosition + 5].classList.replace('square', 'shipCruiser')
-        squareImp[gridPosition + width].classList.replace('square', 'shipCruiser')
-        squareImp[gridPosition + width + 1].classList.replace('square', 'shipCruiser')
-        squareImp[gridPosition + width + 2].classList.replace('square', 'shipCruiser')
-        squareImp[gridPosition + width + 3].classList.replace('square', 'shipCruiser')
-        squareImp[gridPosition + width + 4].classList.replace('square', 'shipCruiser')
-        squareImp[gridPosition + width + 5].classList.replace('square', 'shipCruiser')
-        squareImp[gridPosition + (width * 2) + 2].classList.replace('square', 'shipCruiser')
-        squareImp[gridPosition + (width * 2) + 3].classList.replace('square', 'shipCruiser')
-        squareImp[gridPosition + (width * 2) + 5].classList.replace('square', 'shipCruiser')
+        squareImp[gridPosition - width + 2].classList.replace('square', 'ship')
+        squareImp[gridPosition - width + 3].classList.replace('square', 'ship')
+        squareImp[gridPosition - width + 5].classList.replace('square', 'ship')
+        squareImp[gridPosition].classList.replace('square', 'ship')
+        squareImp[gridPosition + 1].classList.replace('square', 'ship')
+        squareImp[gridPosition + 2].classList.replace('square', 'ship')
+        squareImp[gridPosition + 3].classList.replace('square', 'ship')
+        squareImp[gridPosition + 4].classList.replace('square', 'ship')
+        squareImp[gridPosition + 5].classList.replace('square', 'ship')
+        squareImp[gridPosition + width].classList.replace('square', 'ship')
+        squareImp[gridPosition + width + 1].classList.replace('square', 'ship')
+        squareImp[gridPosition + width + 2].classList.replace('square', 'ship')
+        squareImp[gridPosition + width + 3].classList.replace('square', 'ship')
+        squareImp[gridPosition + width + 4].classList.replace('square', 'ship')
+        squareImp[gridPosition + width + 5].classList.replace('square', 'ship')
+        squareImp[gridPosition + (width * 2) + 2].classList.replace('square', 'ship')
+        squareImp[gridPosition + (width * 2) + 3].classList.replace('square', 'ship')
+        squareImp[gridPosition + (width * 2) + 5].classList.replace('square', 'ship')
       }
     }
     impDeployed.push(1)
@@ -1004,6 +1065,22 @@ function init() {
   restartButton.addEventListener('click', () => {
     location = location
   })
+
+  shapes.addEventListener('click', () => {
+    overlay.style.opacity = '1'
+    overlay.style.visibility = 'visible'
+    overlay.style.display = 'flex'
+  }
+  )
+
+  close.addEventListener('click', () => {
+    overlay.style.opacity = '0'
+    overlay.style.visibility = 'hidden'
+    overlay.style.display = 'none'
+  }
+  )
+  
+
 
   rebRedeploy.addEventListener('click', redeploy)
   impRedeploy.addEventListener('click', redeploy)

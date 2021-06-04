@@ -13,6 +13,14 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+header {
+  background-color: black;
+  border-top-left-radius: 75px;
+  border-top-right-radius: 75px;
+}
+
+
+
 #rebelSide .grid{
   background-image: url("../Images/Rebel.png");
   border-radius: 10px;
@@ -51,13 +59,13 @@ content{
   margin: 50px;
 }
 
-header{
+.header{
   text-align: center;
   font-family: 'Star Jedi', arial;
   font-size: 50px;
-  background-color: black;
+  /* background-color: black;
   border-top-left-radius: 75px;
-  border-top-right-radius: 75px;
+  border-top-right-radius: 75px; */
 }
 #battleship {
   font-family: arial;
@@ -333,5 +341,54 @@ footer{
 
 #counters p{
   flex: 1;
+  font-size: x-large;
+}
+
+.overlay {
+  width: 1000px;
+  border: solid yellow;
+  border-radius: 7px;
+  position: fixed;
+  background: black;
+  visibility: hidden;
+  left: 300px;
+  opacity: 0;
+  display: none;
+  flex-direction: column;
+}
+
+#shipShapes {
+  display: flex;
+  flex-direction: row;
+}
+
+#rebelShapes {
+  background-color: black;
+  border: solid yellow 2px;
+  border-radius: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#imperialShapes {
+  background-color: black;
+  border: solid yellow 2px;
+  border-radius: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shapes {
+  display: flex;
+  align-items: center;
+}
+
+#shapeHeader {
   font-size: x-large;
 }
