@@ -95,7 +95,7 @@ function init() {
   const playerImperialWin = document.createElement('section')
   playerImperialWin.innerText = 'You have crushed these rebels like the dogs they are. Pick up any of their survivors, we have ways of making them talk. Well done.'
   playerImperialWin.style.fontSize = 'larger'
-  playerImperialWin.style.backgroundImage = 'url("/Users/mtsolt/development/SEI-project-1/Images/EmpWin.jpeg")'
+  playerImperialWin.style.backgroundImage = 'url("./Images/EmpWin.jpeg")'
   playerImperialWin.style.backgroundSize = 'cover'
   playerImperialWin.style.backgroundRepeat = 'no-repeat'
 
@@ -103,21 +103,21 @@ function init() {
   const playerImperialLoss = document.createElement('section')
   playerImperialLoss.innerText = 'You fool, you have lost the day. Better that you die out there than the Emperor hear of your idiocy.'
   playerImperialLoss.style.fontSize = 'larger'
-  playerImperialLoss.style.backgroundImage = 'url("/Users/mtsolt/development/SEI-project-1/Images/EmpLoss.jpeg")'
+  playerImperialLoss.style.backgroundImage = 'url("./Images/EmpLoss.jpeg")'
   playerImperialLoss.style.backgroundSize = 'cover'
   playerImperialLoss.style.backgroundRepeat = 'no-repeat'
 
   const playerRebelWin = document.createElement('section')
   playerRebelWin.innerText = 'You have won! The Imperial fleet will surely suffer as a result of this victory. Well done Commander!'
   playerRebelWin.style.fontSize = 'larger'
-  playerRebelWin.style.backgroundImage = 'url("/Users/mtsolt/development/SEI-project-1/Images/RebWin.jpeg")'
+  playerRebelWin.style.backgroundImage = 'url("./Images/RebWin.jpeg")'
   playerRebelWin.style.backgroundSize = 'cover'
   playerRebelWin.style.backgroundRepeat = 'no-repeat'
 
   const playerRebelLoss = document.createElement('section')
   playerRebelLoss.innerText = "Commander, we can't sustain these losses any longer, pull back what remains of your group. We have lost this day."
   playerRebelLoss.style.fontSize = 'larger'
-  playerRebelLoss.style.backgroundImage = 'url("/Users/mtsolt/development/SEI-project-1/Images/RebLoss.jpeg")'
+  playerRebelLoss.style.backgroundImage = 'url("./Images/RebLoss.jpeg")'
   playerRebelLoss.style.backgroundSize = 'cover'
   playerRebelLoss.style.backgroundRepeat = 'no-repeat'
 
@@ -166,6 +166,7 @@ function init() {
 
   const fight = [1,2,3,4]
   let battleMus = Math.floor(Math.random() * fight.length)
+  
   function newBattleMusic(battleMus) {
     battleMusic.src = `./backgroundMusic/Battle/${battleMus}.mp3`
     backgroundMusic.pause()
@@ -270,10 +271,10 @@ function init() {
     gridReb.removeChild(chooseRebButton)
     // gridReb.style.backgroundImage = 'url("../Images/Left.png")' <-- neither of these load the image
     // gridReb.style.backgroundImage = 'url("..SEI-project-1/Images/Left.png")' <-- neither of these load the image
-    gridReb.style.backgroundImage = 'url("/Users/mtsolt/development/SEI-project-1/Images/Left.png")'
+    gridReb.style.backgroundImage = 'url("../Images/Left.png")'
     gridReb.style.border = 'solid #2d6826 5px'
     gridReb.style.backgroundSize = '100%'
-    gridImp.style.backgroundImage = 'url("/Users/mtsolt/development/SEI-project-1/Images/Right.png")'
+    gridImp.style.backgroundImage = 'url("../Images/Right.png")'
     gridImp.style.border = 'solid #2d6826 5px'
     setTimeout(createGrids(), 2000)
     setTimeout(placeFalcon(), 10)
