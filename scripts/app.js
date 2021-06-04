@@ -78,7 +78,15 @@ function init() {
   shapes.style.fontSize = 'larger'
   shapes.style.margin = '5px'
 
-  
+  const newMusic = document.createElement('button')
+  newMusic.innerText = 'Ship Shapes on Grid'
+  newMusic.style.display = 'flex'
+  newMusic.style.justifyContent = 'center'
+  newMusic.style.padding = '10px'
+  newMusic.style.fontSize = 'larger'
+  newMusic.style.margin = '5px'
+
+
 
 
 
@@ -144,10 +152,39 @@ function init() {
   // console.log('youRem', youRem)
 
   // const imperialShot = document.querySelector('.computerShoot')
-  const audio = document.querySelector('audio')
-  const sounds = [1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+  const audio = document.querySelector('#audio')
+  const sounds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
   let randomSound = Math.floor(Math.random() * sounds.length)
-  
+  const backgroundMusic = document.querySelector('#backgroundMusic')
+  const battleMusic = document.querySelector('#battleMusic')
+  const impWinMusic = document.querySelector('#impWinMusic')
+  const rebWinMusic = document.querySelector('#rebWinMusic')
+
+  function backgroundMus() {
+    backgroundMusic.play()
+  }
+
+  const fight = [1,2,3,4]
+  let battleMus = Math.floor(Math.random() * fight.length)
+  function newBattleMusic(battleMus) {
+    battleMusic.src = `backgroundMusic/Battle/${battleMus}.mp3`
+    backgroundMusic.stop()
+    battleMusic.play()
+  }
+
+  function impWinMus() {
+    impWinMusic.src = `./backgroundMusic/ImperialWin.mp3`
+    backgroundMusic.stop()
+    impWinMusic.play()
+  }
+
+  function rebWinMus() {
+    rebWinMusic.src = `./backgroundMusic/Theme.mp3`
+    backgroundMusic.stop()
+    rebWinMusic.play()
+  }
+
+
   function playSound(randomSound) {
     audio.src = `./Sounds/${randomSound}.wav`
     audio.play()
@@ -258,6 +295,7 @@ function init() {
     scroller.innerText = ''
     impBegin.style.display = 'none'
     centerColumn.appendChild(shapes)
+    centerColumn.appendChild(newMusic)
     return playerImperial()
   }
 
@@ -351,7 +389,7 @@ function init() {
           if (squareImp[nextShot].classList.contains('square')) {
             squareImp[nextShot].classList.replace('square', 'miss')
             randomSound = Math.floor(Math.random() * sounds.length)
-          playSound(randomSound)
+            playSound(randomSound)
             scroller.innerText = ("The Rebel fleet missed, it is your go!")
             // console.log('computer miss')
             shoot = 1
@@ -368,7 +406,7 @@ function init() {
           } else {
             scroller.innerText = 'The computer hit! It will go again'
             randomSound = Math.floor(Math.random() * sounds.length)
-          playSound(randomSound)
+            playSound(randomSound)
             squareImp[nextShot].classList.replace('ship', 'hit')
             youParts--
             youRem.innerText = youParts
@@ -388,6 +426,7 @@ function init() {
       item.style.display = 'none'
     })
     main.appendChild(playerImperialWin)
+    impWinMus()
   }
 
   function playerImpLoss() {
@@ -395,6 +434,7 @@ function init() {
       item.style.display = 'none'
     })
     main.appendChild(playerImperialLoss)
+    rebWinMus()
   }
 
 
@@ -426,6 +466,7 @@ function init() {
     scroller.innerText = ''
     rebBegin.style.display = 'none'
     centerColumn.appendChild(shapes)
+    centerColumn.appendChild(newMusic)
     return playerRebel()
   }
 
@@ -516,7 +557,7 @@ function init() {
         }
       }
     }
-    
+
     function computerImpHit() {
       for (let i = 0; i < 1; i++) {
         const squareReb = document.querySelectorAll('#rebelSide .grid-wrapper .grid div')
@@ -575,12 +616,14 @@ function init() {
       item.style.display = 'none'
     })
     main.appendChild(playerRebelWin)
+    rebWinMus()
   }
   function playerRebLoss() {
     finish.forEach(item => {
       item.style.display = 'none'
     })
     main.appendChild(playerRebelLoss)
+    impWinMus()
   }
 
 
@@ -1055,7 +1098,13 @@ function init() {
 
 
 
-  startGameButton.addEventListener('click', startGame)
+  startGameButton.addEventListener('click', () => {
+    backgroundMus()
+    startGame()
+  })
+  
+  newMusic.addEventListener('click', newBattleMusic(battleMus))
+
 
   restartButton.addEventListener('click', startGame)
 
@@ -1079,7 +1128,7 @@ function init() {
     overlay.style.display = 'none'
   }
   )
-  
+
 
 
   rebRedeploy.addEventListener('click', redeploy)
@@ -1132,8 +1181,7 @@ function init() {
   //   item.addEventListener('click', playerShot)
   // })
 
-
-
+  
 
 
   // createGrids()
