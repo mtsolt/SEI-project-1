@@ -167,7 +167,7 @@ function init() {
   const fight = [1,2,3,4]
   let battleMus = Math.floor(Math.random() * fight.length)
   function newBattleMusic(battleMus) {
-    battleMusic.src = `backgroundMusic/Battle/${battleMus}.mp3`
+    battleMusic.src = `./backgroundMusic/Battle/${battleMus}.mp3`
     backgroundMusic.pause()
     battleMusic.play()
   }
