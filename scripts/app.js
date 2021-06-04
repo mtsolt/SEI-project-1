@@ -94,6 +94,7 @@ function init() {
 
   const playerImperialWin = document.createElement('section')
   playerImperialWin.innerText = 'You have crushed these rebels like the dogs they are. Pick up any of their survivors, we have ways of making them talk. Well done.'
+  playerImperialWin.style.height = '300px'
   playerImperialWin.style.fontSize = 'larger'
   playerImperialWin.style.backgroundImage = 'url("./Images/EmpWin.jpeg")'
   playerImperialWin.style.backgroundSize = 'cover'
@@ -102,6 +103,7 @@ function init() {
 
   const playerImperialLoss = document.createElement('section')
   playerImperialLoss.innerText = 'You fool, you have lost the day. Better that you die out there than the Emperor hear of your idiocy.'
+  playerImperialLoss.style.height = '300px'
   playerImperialLoss.style.fontSize = 'larger'
   playerImperialLoss.style.backgroundImage = 'url("./Images/EmpLoss.jpeg")'
   playerImperialLoss.style.backgroundSize = 'cover'
@@ -109,6 +111,7 @@ function init() {
 
   const playerRebelWin = document.createElement('section')
   playerRebelWin.innerText = 'You have won! The Imperial fleet will surely suffer as a result of this victory. Well done Commander!'
+  playerRebelWin.style.height = '300px'
   playerRebelWin.style.fontSize = 'larger'
   playerRebelWin.style.backgroundImage = 'url("./Images/RebWin.jpeg")'
   playerRebelWin.style.backgroundSize = 'cover'
@@ -116,6 +119,7 @@ function init() {
 
   const playerRebelLoss = document.createElement('section')
   playerRebelLoss.innerText = "Commander, we can't sustain these losses any longer, pull back what remains of your group. We have lost this day."
+  playerRebelLoss.style.height = '300px'
   playerRebelLoss.style.fontSize = 'larger'
   playerRebelLoss.style.backgroundImage = 'url("./Images/RebLoss.jpeg")'
   playerRebelLoss.style.backgroundSize = 'cover'
